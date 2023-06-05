@@ -1,0 +1,22 @@
+{
+  "name": "rpg_community",
+  "version": "1.0.0",
+  "description": "## RoR - Mediaval RPG",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "rails s",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx prettier --plugin=@prettier/plugin-ruby --write '{,!(vendor)/**/}*.rb*'",
+    "lint:old": "npx prettier --plugin=@prettier/plugin-ruby --write '**/*.rb'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prettier/plugin-ruby": "^4.0.2",
+    "prettier": "^3.0.3"
+  }
+}

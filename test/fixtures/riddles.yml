@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stage: one
+  question: MyText
+  answer: MyString
+
+two:
+  stage: two
+  question: MyText
+  answer: MyString
