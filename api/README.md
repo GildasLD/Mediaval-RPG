@@ -30,11 +30,16 @@ Vous devez créer une interface qui permet de créer des quêtes. Une quête est
 
 Un PNJ dipose également d’un avatar.
 
-Après chaque étape, le joueur reçoit un peu d’expérience. En fin de quête, le personnage reçoit beaucoup d’expérience et gagne un objet à équiper. Il devra donc être possible, en plus de modifier les quêtes, d’ajouter des équipements, dotés de caractéristiques ainsi que d’une image. Absolument tout le jeu doit être modifiable par le maître du jeu.
+- Après chaque étape, le joueur reçoit un peu d’expérience. 
+- En fin de quête, le personnage reçoit beaucoup d’expérience et gagne un objet à équiper. 
+- Il devra donc être possible, en plus de modifier les quêtes, d’ajouter des équipements, dotés de caractéristiques ainsi que d’une image. 
+- Absolument tout le jeu doit être modifiable par le maître du jeu.
 
 ### Joueur
 
-Vous devez créer une interface qui permet de consulter ses caractéristiques (Expérience, Vie et Force) ainsi qu’un inventaire permettant d’équiper 3 objets (chapeau, arme, bouclier), que le joueur peut choisir parmi son inventaire. Chaque objet altère la Force, la Vie, peut accroître l’expérience gagnée à chaque étape, ou bien plusieurs de ces bonus/malus à la fois. En fin de quête, il est proposé au joueur de récupérer 1 objet parmi plusieurs qui lui sont proposés.
+- Vous devez créer une interface qui permet de consulter ses caractéristiques (Expérience, Vie et Force) ainsi qu’un inventaire permettant d’équiper 3 objets (chapeau, arme, bouclier), que le joueur peut choisir parmi son inventaire. 
+- Chaque objet altère la Force, la Vie, peut accroître l’expérience gagnée à chaque étape, ou bien plusieurs de ces bonus/malus à la fois. 
+- En fin de quête, il est proposé au joueur de récupérer 1 objet parmi plusieurs qui lui sont proposés.
 
 ## Interface
 
@@ -64,3 +69,34 @@ Les points d’expérience accumulés permettent de définir un système de nive
 
 - Introduire un monde virtuel où les joueurs peuvent se déplacer et communiquer entre eux.
 - Les joueurs peuvent former des groupes afin d’effectuer des quêtes en même temps, et s’ils choisissent de combattre, peuvent s’allier contre un PNJ très puisant
+
+---
+
+Voici un exemple de requête POST pour créer un compte :
+
+```sh
+curl --request POST \
+  --url http://localhost:3009/users.json \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"user": {
+		"username": "gildasTEST",
+		"email": "gildas.TEST@epitech.eu",
+		"password": "gildasTEST",
+		"password_confirm": "gildasTEST"
+	}
+}'
+```
+
+And to authenticate:
+```sh
+curl --request POST \
+  --url http://localhost:3015/users/sign_in.json \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"user": {
+		"login": "gildas.le-drogoff@epitech.eu",
+		"password": "bob"
+	}
+}'
+```

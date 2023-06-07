@@ -8,7 +8,7 @@
 # rake db:migrate && \
 # rake db:seed && \
 
-start: clean-database
+start: clean-database lint
 	bundle config set --local path vendor/bundle;
 	bundle install --gemfile=Gemfile;
 	rake db:drop && \
@@ -24,3 +24,16 @@ clean-database:
 
 kill-current-process:
 	cat ./tmp/pids/server.pid | xargs kill -9
+
+lint:
+	npx prettier --plugin=@prettier/plugin-ruby --write '{,!(vendor)/**/}*.rb*'
+
+install:
+	bundle config set --local path vendor/bundle;
+	bundle install --gemfile=Gemfile;
+
+server: lint
+	rails server;
+
+s: lint
+	rails server;

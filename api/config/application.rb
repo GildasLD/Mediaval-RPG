@@ -20,15 +20,9 @@ module RpgCommunity
     # config.eager_load_paths << Rails.root.join("extras")
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "localhost:3009",
-                "127.0.0.1:3009",
-                "localhost:3000",
-                "127.0.0.1:3000",
-                /\Ahttp:\/\/192\.168\.0\.\d{1,3}(:\d+)?\z/,
-                /\Ahttp:\/\/localhost.*?\z/
+        origins "*"
         resource "*",
                  headers: :any,
-                 credentials: true,
                  methods: %i[get post put patch delete options head]
       end
     end
