@@ -10,7 +10,7 @@ class CreateInventories < ActiveRecord::Migration[7.0]
       t.integer :strength
       t.integer :weapon
       t.string :image
-      t.timestamps default: -> { 'CURRENT_TIMESTAMP' }
+      t.timestamps default: -> { "CURRENT_TIMESTAMP" }
     end
   end
 end

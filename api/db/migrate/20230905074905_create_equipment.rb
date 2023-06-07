@@ -7,7 +7,7 @@ class CreateEquipment < ActiveRecord::Migration[7.0]
       t.integer :helmet
       t.integer :shield
       t.integer :weapon
-      t.timestamps default: -> { 'CURRENT_TIMESTAMP' }
+      t.timestamps default: -> { "CURRENT_TIMESTAMP" }
     end
   end
 end

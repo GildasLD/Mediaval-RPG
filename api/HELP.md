@@ -1,6 +1,8 @@
 RAILS_ENV=production rails assets:precompile
 http://localhost:3009/users/sign_in
 
+rails credentials:edit
+
 bundle add bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs
 bundle add devise
 bundle add rails
@@ -11,7 +13,6 @@ gem install rails
 gem install rails --no-document
 rails --help
 rails --version
-rails credentials:edit
 rails db:create
 rails db:migrate
 rails db:seed
