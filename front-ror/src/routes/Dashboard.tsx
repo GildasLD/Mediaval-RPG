@@ -1,11 +1,7 @@
-import LoginComponent from "../components/LoginComponent";
+import Login from "../components/Login";
 
 const Dashboard = () => {
-  return (
-
-    <LoginComponent />
-
-  );
+  return <Login />;
 };
 
-export default Dashboard; 
+export default Dashboard;

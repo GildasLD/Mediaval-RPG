@@ -7,6 +7,7 @@
 !**/tmp/storage/
 !**/tmp/storage/.keep
 !bin/
+!lib/**/*
 **/.bridgesupport
 **/.bundle
 **/.bundle/

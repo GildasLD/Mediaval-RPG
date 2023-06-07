@@ -1,17 +1,48 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
-html, .bg {
+@import "bootstrap/dist/css/bootstrap.min.css";
+body {
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background: url(./assets/images/bg.jpg) no-repeat center fixed !important;
+  background: url(https://gildasld.github.io/static-images/images/ror-bg.jpg) no-repeat center fixed !important;
   height: 100vh !important;
-  width: 100vw !important;
-}
-body {
+  width: 100vw !important; 
   margin: 0;
+} 
+.riddles--display {
+  --bs-bg-opacity: 0.35;
+  margin-top: 5px;
+  text-align: center;
+  background-color: #ffffff7c;
+}
+
+.background-white {
+  background-color: #2c578e;
+  color: #fff;
+  width: 95%;
+  padding: 0.5em;
+  // margin: .4em 0 0;
+  border-radius: 0.5em;
+}
+#inputColor {
+  accent-color: red;
+}
+.img-description {
+  --bs-bg-opacity: 0.35;
+  margin-top: 5px;
+  text-align: center;
+}
+.quests {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding: 1em;
+  padding-top: 48%;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
 }
 main {
   display: block;
@@ -114,19 +145,19 @@ textarea {
   margin: 0;
   overflow: auto;
 }
-[type='button'] {
+[type="button"] {
   -webkit-appearance: button;
   border-style: none;
   outline: 1px dotted ButtonText;
   padding: 0;
 }
-[type='reset'] {
+[type="reset"] {
   -webkit-appearance: button;
   border-style: none;
   outline: 1px dotted ButtonText;
   padding: 0;
 }
-[type='submit'] {
+[type="submit"] {
   -webkit-appearance: button;
   border-style: none;
   outline: 1px dotted ButtonText;
@@ -146,27 +177,27 @@ legend {
 progress {
   vertical-align: baseline;
 }
-[type='checkbox'] {
+[type="checkbox"] {
   box-sizing: border-box;
   padding: 0;
 }
-[type='radio'] {
+[type="radio"] {
   box-sizing: border-box;
   padding: 0;
 }
-[type='number']::-webkit-inner-spin-button {
+[type="number"]::-webkit-inner-spin-button {
   height: auto;
 }
-[type='number']::-webkit-outer-spin-button {
+[type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
-[type='search'] {
+[type="search"] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
   -webkit-appearance: button;
   font: inherit;
 }
-[type='search']::-webkit-search-decoration {
+[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 details {
@@ -181,9 +212,39 @@ template {
 [hidden] {
   display: none;
 }
+@mixin center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:100vh;  
+  @include center;
+}
+.riddle-or-figth {
+  @include center;
+}
+
+.riddles--suggestions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 15px;
+  grid-template-areas: ". .";
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  width: 15em;
+  margin-top: 1em;
+  padding: 0.5em 0;
+  & > button {
+    background-color: #80140a;
+  }
+}
+.riddle-or-figth > button {
+  margin: 1em;
+  color: white;
+  background-color: #2c578e;
 }

@@ -1,4 +1,8 @@
 class QuestsController < ApplicationController
+  # No action on this controller is accessible without a
+  # supplying a valid token.
+  # before_action :verify_jwt_token
+
   def new
     @quest = Quest.new
   end
@@ -10,11 +14,7 @@ class QuestsController < ApplicationController
   def create
     json_data = JSON.parse(request.body.read)
     quest =
-      Quest.new(
-        name: json_data["name"],
-        description: json_data["description"],
-        user_id: 1
-      )
+      Quest.new(name: json_data["name"], description: json_data["description"])
     if quest.save
       render json: { status: "success" }, status: :ok
     else
