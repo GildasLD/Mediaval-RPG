@@ -9,7 +9,7 @@ class CreateNonPlayerCharacters < ActiveRecord::Migration[7.0]
       t.integer :shield
       t.integer :weapon
       t.string :image
-      t.timestamps default: -> { 'CURRENT_TIMESTAMP' }
+      t.timestamps default: -> { "CURRENT_TIMESTAMP" }
     end
   end
 end

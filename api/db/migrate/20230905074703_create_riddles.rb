@@ -8,7 +8,7 @@ class CreateRiddles < ActiveRecord::Migration[7.0]
       t.text :thirdSuggestion
       t.text :fourthSuggestion
       t.text :answer
-      t.timestamps default: -> { 'CURRENT_TIMESTAMP' }
+      t.timestamps default: -> { "CURRENT_TIMESTAMP" }
     end
   end
 end

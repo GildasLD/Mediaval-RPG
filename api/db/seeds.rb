@@ -17,6 +17,13 @@ roles.each { |role| Role.create!(role) }
 
 users = [
   {
+    email: "gildas.le-drogoff@epitech.eu",
+    username: "GildasLD",
+    password: "bob",
+    password_confirmation: "bob",
+    role: "Player"
+  },
+  {
     email: "gildas.le-drogoff+player@epitech.eu",
     username: "GildasLD-player",
     password: "bob",
@@ -41,8 +48,16 @@ users = [
 users.each { |user| User.create!(user) }
 
 quests = [
-  { name: "Become your inner dragon", description: "Become your inner dragon", user_id: 1 },
-  { name: "Become your inner squirrel", description: "Become your inner squirrel", user_id: 1 }
+  {
+    name: "Become your inner dragon",
+    description: "Become your inner dragon",
+    user_id: 1
+  },
+  {
+    name: "Become your inner squirrel",
+    description: "Become your inner squirrel",
+    user_id: 1
+  }
 ]
 quests.each { |quest| Quest.create!(quest) }
 

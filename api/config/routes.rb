@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get "/quests/:id", to: "quests#show"
   post "/quests/create", to: "quests#create"
   put "/quests/:id", to: "quests#update"
+
+  get 'current_user', to: 'users#current'
 end
