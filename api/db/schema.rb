@@ -10,35 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_06_125211) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_112833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
-    t.text "quests", default: [], array: true
-    t.text "completedQuests", default: [], array: true
-    t.text "fights", default: [], array: true
-    t.integer "image"
-    t.integer "level"
-    t.integer "lifePoints"
-    t.integer "points"
-    t.integer "strength"
-    t.integer "xp"
+    t.integer "image", default: 1
     t.text "description"
-    t.bigint "user_id"
-    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["user_id"], name: "index_characters_on_user_id"
-  end
-
-  create_table "equipment", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "image"
-    t.integer "helmet"
-    t.integer "shield"
-    t.integer "weapon"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
@@ -49,23 +28,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_125211) do
     t.integer "shield"
     t.integer "weapon"
     t.text "items", default: [], array: true
-    t.bigint "character_id"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["character_id"], name: "index_inventories_on_character_id"
   end
 
   create_table "non_player_characters", force: :cascade do |t|
     t.bigint "stage_id", null: false
-    t.integer "life"
-    t.integer "strength"
-    t.integer "helmet"
+    t.bigint "character_id", null: false
+    t.bigint "inventory_id"
     t.integer "level"
-    t.integer "shield"
-    t.integer "weapon"
-    t.string "image"
+    t.integer "lifePoints"
+    t.integer "points"
+    t.integer "strength"
+    t.integer "wisdom"
+    t.integer "xp"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["character_id"],
+            name: "index_non_player_characters_on_character_id"
+    t.index ["inventory_id"],
+            name: "index_non_player_characters_on_inventory_id"
     t.index ["stage_id"], name: "index_non_player_characters_on_stage_id"
   end
 
@@ -108,12 +90,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_125211) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "role"
+    t.string "role", null: false
     t.text "description"
-    t.bigint "user_id"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -124,12 +104,47 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_125211) do
     t.index ["quest_id"], name: "index_stages_on_quest_id"
   end
 
+  create_table "store", force: :cascade do |t|
+    t.string "image"
+    t.integer "charisma"
+    t.integer "defense"
+    t.integer "gold"
+    t.integer "helmet"
+    t.integer "intelligence"
+    t.integer "shield"
+    t.integer "speed"
+    t.integer "strength"
+    t.integer "weapon"
+    t.integer "wisdom"
+  end
+
+  create_table "user_characters", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "character_id", null: false
+    t.integer "level", default: 1
+    t.integer "lifePoints", default: 100
+    t.integer "points", default: 1
+    t.integer "strength", default: 100
+    t.integer "wisdom", default: 1
+    t.integer "xp", default: 1
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["character_id"], name: "index_user_characters_on_character_id"
+    t.index ["user_id"], name: "index_user_characters_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: ""
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "role", default: "Player"
+    t.bigint "role_id", default: 1, null: false
+    t.bigint "inventory_id"
+    t.integer "characters", default: [], array: true
+    t.integer "xp"
     t.integer "quests", default: [], array: true
+    t.integer "completedQuests", default: [], array: true
+    t.integer "fights", default: [], array: true
+    t.integer "riddles", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -141,15 +156,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_125211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["inventory_id"], name: "index_users_on_inventory_id"
+    t.index ["reset_password_token"],
+            name: "index_users_on_reset_password_token",
+            unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "characters", "users"
-  add_foreign_key "inventories", "characters"
+  add_foreign_key "non_player_characters", "characters"
+  add_foreign_key "non_player_characters", "inventories"
   add_foreign_key "non_player_characters", "stages"
   add_foreign_key "riddles", "quests"
   add_foreign_key "riddles", "stages"
-  add_foreign_key "roles", "users"
   add_foreign_key "stages", "quests"
+  add_foreign_key "user_characters", "characters"
+  add_foreign_key "user_characters", "users"
+  add_foreign_key "users", "inventories"
+  add_foreign_key "users", "roles"
 end

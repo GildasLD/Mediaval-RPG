@@ -15,34 +15,49 @@
 roles = [{ role: "Player" }, { role: "Admin" }, { role: "GameMaster" }]
 roles.each { |role| Role.create!(role) }
 
+inventories = [
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 },
+  { helmet: 1, shield: 1, weapon: 1 }
+]
+inventories.each { |inventory| Inventory.create!(inventory) }
+
 users = [
   {
     email: "gildas.le-drogoff@epitech.eu",
     username: "GildasLD",
     password: "bob",
     password_confirmation: "bob",
-    role: "Player"
+    role_id: 1,
+    inventory_id: 1
   },
   {
     email: "gildas.le-drogoff+player@epitech.eu",
     username: "GildasLD-player",
     password: "bob",
     password_confirmation: "bob",
-    role: "Player"
+    role_id: 1,
+    inventory_id: 2
   },
   {
     email: "gildas.le-drogoff+admin@epitech.eu",
     username: "GildasLD-admin",
     password: "bob",
     password_confirmation: "bob",
-    role: "Admin"
+    role_id: 2,
+    inventory_id: 3
   },
   {
     email: "gildas.le-drogoff+GameMaster@epitech.eu",
     username: "GildasLD-GameMaster",
     password: "bob",
     password_confirmation: "bob",
-    role: "GameMaster"
+    role_id: 3,
+    inventory_id: 4
   }
 ]
 users.each { |user| User.create!(user) }
@@ -135,79 +150,85 @@ riddles = [
 riddles.each { |riddle| Riddle.create!(riddle) }
 
 characters = [
-  {
-    name: "Erna Jason",
-    level: 1,
-    xp: 0,
-    lifePoints: 100,
-    strength: 15,
-    points: 5,
-    quests: [],
-    fights: [],
-    completedQuests: [],
-    user_id: 1,
-    image: 1
-  },
-  {
-    name: "Cupido Sobek",
-    level: 1,
-    xp: 0,
-    lifePoints: 100,
-    strength: 15,
-    points: 5,
-    quests: [],
-    fights: [],
-    completedQuests: [],
-    user_id: 1,
-    image: 1
-  },
-  {
-    name: "Lucifer Hel",
-    level: 1,
-    xp: 0,
-    lifePoints: 100,
-    strength: 15,
-    points: 5,
-    quests: [],
-    fights: [],
-    completedQuests: [],
-    user_id: 1,
-    image: 1
-  },
-  {
-    name: "Mars Hippolyte",
-    level: 1,
-    xp: 0,
-    lifePoints: 100,
-    strength: 15,
-    points: 5,
-    quests: [],
-    fights: [],
-    completedQuests: [],
-    user_id: 1,
-    image: 1
-  },
-  {
-    name: "Eunomia Longwang",
-    level: 1,
-    xp: 0,
-    lifePoints: 100,
-    strength: 15,
-    points: 5,
-    quests: [],
-    fights: [],
-    completedQuests: [],
-    user_id: 1,
-    image: 1
-  }
+  { name: "Erna Jason", image: 1 },
+  { name: "Cupido Sobek", image: 2 },
+  { name: "Lucifer Hel", image: 3 },
+  { name: "Mars Hippolyte", image: 4 },
+  { name: "Eunomia Longwang", image: 5 }
 ]
 characters.each { |character| Character.create!(character) }
 
-inventories = [
-  { helmet: 1, shield: 1, weapon: 1, character_id: 1 },
-  { helmet: 1, shield: 1, weapon: 1, character_id: 2 },
-  { helmet: 1, shield: 1, weapon: 1, character_id: 3 },
-  { helmet: 1, shield: 1, weapon: 1, character_id: 4 },
-  { helmet: 1, shield: 1, weapon: 1, character_id: 5 }
+non_player_characters = [
+  {
+    stage_id: 2,
+    character_id: 5,
+    level: 5,
+    lifePoints: 100,
+    points: 0,
+    strength: 100,
+    wisdom: 0,
+    xp: 100,
+    inventory_id: 2
+  },
+  {
+    stage_id: 2,
+    character_id: 2,
+    level: 5,
+    lifePoints: 100,
+    points: 0,
+    strength: 100,
+    wisdom: 0,
+    xp: 100,
+    inventory_id: 1
+  },
+  {
+    stage_id: 1,
+    character_id: 1,
+    level: 1,
+    lifePoints: 50,
+    points: 0,
+    strength: 50,
+    wisdom: 0,
+    xp: 50,
+    inventory_id: 3
+  }
 ]
-inventories.each { |inventory| Inventory.create!(inventory) }
+
+non_player_characters.each do |non_player_character|
+  NonPlayerCharacter.create!(non_player_character)
+end
+
+user_characters = [
+  {
+    user_id: 1,
+    character_id: 5,
+    level: 5,
+    lifePoints: 100,
+    points: 0,
+    strength: 100,
+    wisdom: 0,
+    xp: 100
+  },
+  {
+    user_id: 1,
+    character_id: 2,
+    level: 5,
+    lifePoints: 100,
+    points: 0,
+    strength: 100,
+    wisdom: 0,
+    xp: 100
+  },
+  {
+    user_id: 2,
+    character_id: 1,
+    level: 1,
+    lifePoints: 50,
+    points: 0,
+    strength: 50,
+    wisdom: 0,
+    xp: 50
+  }
+]
+
+user_characters.each { |user_character| UserCharacter.create!(user_character) }

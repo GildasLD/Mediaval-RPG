@@ -5,20 +5,20 @@ const API_URL = "http://localhost:3009";
 axios.defaults.withCredentials = true;
 class GamePlay {
   createCharacter(name) {
-    return axios
-      .post(`${API_URL}/character`, { name })
-      .then((response) => {
-       console.warn(`🚀 > file: GamePlay.tsx:11 > GamePlay > .then > response:`, response);
+    return axios.post(`${API_URL}/character`, { name }).then((response) => {
+      console.warn(
+        `🚀 > file: GamePlay.tsx:11 > GamePlay > .then > response:`,
+        response,
+      );
 
-       
-        return response.data;
-      });
-  }
-  fetchCharacters() {
-    return axios.get(`${API_URL}/characters`).then((response) => {
       return response.data;
     });
-  } 
+  }
+  fetchCharacters(user = null) {
+    return axios.get(`${API_URL}/user_characters/`).then((response) => {
+      return response.data;
+    });
+  }
   getQuests() {
     return axios.get(`${API_URL}/quests`).then((response) => {
       return response.data;

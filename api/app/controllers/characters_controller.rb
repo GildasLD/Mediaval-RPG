@@ -5,12 +5,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character =
-      Character.create(
-        name: params[:name],
-        user: params[:user],
-        image: params[:image]
-      )
+    @character = Character.create(name: params[:name], image: params[:image])
     @inventory = Inventory.create(items: [])
     @character.update(inventory: @inventory.id)
     if @character.save

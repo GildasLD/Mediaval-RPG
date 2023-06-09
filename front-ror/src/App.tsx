@@ -1,10 +1,10 @@
+import { LicenseInfo } from "@mui/x-license-pro";
 import { Link, Outlet, Route, Routes } from "react-router-dom";
+import CharacterSelector from "./components/Characters/CharacterSelector";
 import Login from "./components/Login";
 import Quest from "./components/Quest";
 import Quests from "./components/Quests";
 import Register from "./components/Register";
-import CharacterSelector from "./components/CharacterSelector";
-import { LicenseInfo } from "@mui/x-license-pro";
 LicenseInfo.setLicenseKey(
   "41bb5af2e7f0c0377375a0beeedfd1f6Tz01ODAxNDY3MixFPTE3MTAxNTMyNTA0NjAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y",
 );

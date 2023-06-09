@@ -94,3 +94,7 @@ gem 'prettier_print', '~> 1.2', '>= 1.2.1'
 gem 'syntax_tree', '~> 6.1', '>= 6.1.1'
 gem 'syntax_tree-haml', '~> 4.0', '>= 4.0.3'
 gem "syntax_tree-rbs", "~> 1.0"
+
+# Tools
+gem 'seed_dump', '~> 3.2', '>= 3.2.4'
+gem 'rake', '~> 13.0', '>= 13.0.6'

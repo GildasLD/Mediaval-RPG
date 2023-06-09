@@ -15,7 +15,7 @@ import {
   Button,
   InputLabel,
 } from "@mui/material";
- 
+
 const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +27,13 @@ const Login = () => {
       .then(async (res) => {
         console.warn(`🚀 > file: Login.tsx:16 > .then > res:`, res);
         let currentUser = res;
+        Cookies.remove("currrent-user", { path: "" });
         Cookies.set("currrent-user", JSON.stringify(currentUser), {
           sameSite: "None",
           secure: true,
           expires: 2,
         });
+
         // let test = JSON.parse(Cookies.get(
         //   "currrent-user"
         // ));

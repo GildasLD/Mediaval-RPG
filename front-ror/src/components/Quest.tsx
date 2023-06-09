@@ -35,12 +35,20 @@ const Quest = () => {
         alignItems="center"
         minHeight="100vh"
       >
-        <Button sx={{ margin: 2, backgroundColor: "#bf502c", color: "#000" }}
-          variant="contained" className="btn " onClick={() => setChoice("riddle")}>
+        <Button
+          sx={{ margin: 2, backgroundColor: "#bf502c", color: "#000" }}
+          variant="contained"
+          className="btn "
+          onClick={() => setChoice("riddle")}
+        >
           Répondre à une énigme
         </Button>
-        <Button sx={{ margin: 2, backgroundColor: "#bf502c", color: "#000" }}
-          variant="contained" className="btn " onClick={() => setChoice("fight")}>
+        <Button
+          sx={{ margin: 2, backgroundColor: "#bf502c", color: "#000" }}
+          variant="contained"
+          className="btn "
+          onClick={() => setChoice("fight")}
+        >
           Combattre un adversaire
         </Button>
       </Box>

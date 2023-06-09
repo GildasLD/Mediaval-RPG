@@ -47,14 +47,15 @@ const Quests = () => {
       minHeight="100vh"
       maxWidth="100vh"
       style={{
-        padding: "2em 5em"
+        padding: "2em 5em",
       }}
     >
       {quests.map((quest) => (
         <>
-          <Box style={{
-            padding: "2em 1em"
-          }}
+          <Box
+            style={{
+              padding: "2em 1em",
+            }}
             onClick={() => {
               navigate(`/quests/${quest.id}/1`);
             }}

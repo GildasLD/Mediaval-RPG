@@ -15,7 +15,10 @@ import {
   TextField,
   Button,
   InputLabel,
-  FormLabel, Radio, FormControlLabel, RadioGroup
+  FormLabel,
+  Radio,
+  FormControlLabel,
+  RadioGroup,
 } from "@mui/material";
 
 const QuestStage = (props) => {
@@ -57,7 +60,6 @@ const QuestStage = (props) => {
   };
 
   return (
-
     <Box
       display="flex"
       justifyContent="center"
@@ -67,12 +69,14 @@ const QuestStage = (props) => {
       <div>
         {riddles.length > 0 && (
           <div>
-            <Box display="flex"
+            <Box
+              display="flex"
               justifyContent="center"
               alignItems="center"
               minHeight="100vh"
               flexDirection="column"
-              className="center">
+              className="center"
+            >
               <div className="mt-2 background-white">
                 {riddles[currentIndex].question}
               </div>
@@ -82,33 +86,45 @@ const QuestStage = (props) => {
                 riddles[currentIndex].thirdSuggestion,
                 riddles[currentIndex].fourthSuggestion,
               ].map((suggestion, index) => (
-                <Box display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                >
+                <Box display="flex" justifyContent="center" alignItems="center">
                   <div
                     onClick={() => setSelectedAnswer(suggestion)}
                     className="riddles--suggestions background-white rounded"
                     key={index}
                   >
-                    <div style={{
-                      display: "flex", justifyContent: "center",
-                      alignItems: "center"
-                    }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                        <FormLabel id="demo-radio-buttons-group-label">
+                          Gender
+                        </FormLabel>
                         <RadioGroup
                           aria-labelledby="demo-radio-buttons-group-label"
                           defaultValue={suggestion}
-                          name="riddleAnswer" 
+                          name="riddleAnswer"
                         >
-                          <FormControlLabel value={suggestion} control={<Radio />} label={suggestion} />
-                          <FormControlLabel value={suggestion} control={<Radio />} label={suggestion} />
-                          <FormControlLabel value={suggestion} control={<Radio />} label={suggestion} />
+                          <FormControlLabel
+                            value={suggestion}
+                            control={<Radio />}
+                            label={suggestion}
+                          />
+                          <FormControlLabel
+                            value={suggestion}
+                            control={<Radio />}
+                            label={suggestion}
+                          />
+                          <FormControlLabel
+                            value={suggestion}
+                            control={<Radio />}
+                            label={suggestion}
+                          />
                         </RadioGroup>
                       </FormControl>
- 
-                      
                     </div>
                   </div>
                 </Box>

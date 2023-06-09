@@ -10,7 +10,10 @@ class User < ApplicationRecord
          :validatable
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  has_many :characters, dependent: :destroy
+  has_many :user_characters
+  has_many :characters, through: :user_characters
+  has_one :role
+  has_one :inventory
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
