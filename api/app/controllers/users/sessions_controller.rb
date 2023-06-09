@@ -20,9 +20,10 @@ class Users::SessionsController < Devise::SessionsController
     respond_to do |format|
       format.json do
         render json: {
+                 id: resource.id,
                  username: resource.username,
                  user: resource.email,
-                 role: resource.role,
+                 role: Role.find(resource.role_id).role,
                  token: token
                }
       end

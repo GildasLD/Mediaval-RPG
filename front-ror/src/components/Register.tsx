@@ -15,6 +15,11 @@ const Register = () => {
   const handleRegister = () => {
     AuthService.register(username, email, password, passwordConfirmation)
       .then(async (res) => {
+        let currentUser = await AuthService.getCurrentUser();
+        console.warn(`  > .then > currentUser:`, currentUser);
+        Cookies.set("currrent-user", JSON.stringify(currentUser), {
+          expires: 7,
+        });
         navigate("/quests/1/1");
       })
       .catch((err) => {

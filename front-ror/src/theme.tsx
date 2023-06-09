@@ -7,7 +7,8 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundImage: 'url("https://gildasld.github.io/static-images/images/ror-bg.jpg")',
+          backgroundImage:
+            'url("https://gildasld.github.io/static-images/images/ror-bg.jpg")',
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",

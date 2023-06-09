@@ -9,10 +9,18 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :encrypted_password, null: false, default: ""
 
       ## Role
-      t.string :role, null: true, default: "Player"
+      t.references :role, null: false, foreign_key: true, default: 1
+      t.references :inventory, null: true, foreign_key: true
+
+      ## Quests
+      t.integer :characters, array: true, null: true, default: []
+      t.integer :xp
 
       ## Quests
       t.integer :quests, array: true, null: true, default: []
+      t.integer :completedQuests, array: true, null: true, default: []
+      t.integer :fights, array: true, null: true, default: []
+      t.integer :riddles, array: true, null: true, default: []
 
       ## Recoverable
       t.string :reset_password_token

@@ -6,7 +6,6 @@ class CreateInventories < ActiveRecord::Migration[7.0]
       t.integer :shield
       t.integer :weapon
       t.text :items, array: true, null: true, default: []
-      t.references :character, null: true, foreign_key: true
       t.timestamps default: -> { "CURRENT_TIMESTAMP" }
     end
   end

@@ -40,4 +40,10 @@ Rails.application.routes.draw do
   put "/characters/updateLifePoints/:id", to: "characters#updateLifePoints"
   put "/characters/updateStrength/:id", to: "characters#updateStrength"
   put "/characters/updateXp", to: "characters#updateXp"
+
+  # User Characters
+  resources :user_characters, only: %i[new index show create destroy]
+  get "/user_characters", to: "user_characters#index"
+  get "/user_characters/:id", to: "user_characters#show"
+  post "/user_characters/create", to: "user_characters#create"
 end
