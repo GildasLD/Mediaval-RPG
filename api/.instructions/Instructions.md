@@ -55,18 +55,18 @@ Absolument tout le jeu doit être modifiable par le maître du jeu.
 
 ### Joueur
 
-- [] Vous devez créer une interface qui permet de consulter ses caractéristiques (Expérience, Vie et Force) 
-- [] Ainsi qu’un inventaire permettant d’équiper 3 objets (chapeau, arme, bouclier), que le joueur peut choisir parmi son inventaire. 
-- [] Chaque objet altère la Force, la Vie, peut accroître l’expérience gagnée à chaque étape, ou bien plusieurs de ces bonus/malus à la fois. 
+- [*] Vous devez créer une interface qui permet de consulter ses caractéristiques (Expérience, Vie et Force) 
+- [*] Ainsi qu’un inventaire permettant d’équiper 3 objets (chapeau, arme, bouclier), que le joueur peut choisir parmi son inventaire. 
+- [*] Chaque objet altère la Force, la Vie, peut accroître l’expérience gagnée à chaque étape, ou bien plusieurs de ces bonus/malus à la fois. 
 - [] En fin de quête, il est proposé au joueur de récupérer 1 objet parmi plusieurs qui lui sont proposés.
 
 ## Interface
 
 Vous devez créer une page d’accueil qui permet de créer un nouveau personnage ou choisir un personnage déjà existant. Ensuite, vous devez avoir un menu qui permet de :
 
-- [] Consulter ses caractéristiques.
-- [] Gérer son inventaire.
-- [] Choisir une nouvelle quête dans une liste ou continuer une quête en cours.
+- [*] Consulter ses caractéristiques.
+- [*] Gérer son inventaire.
+- [*] Choisir une nouvelle quête dans une liste ou continuer une quête en cours.
 - [] Avoir accès à l’énigme et aux différentes options possibles.
 
 ## Combattre un PNJ

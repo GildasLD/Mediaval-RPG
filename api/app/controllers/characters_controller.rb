@@ -75,7 +75,7 @@ class CharactersController < ApplicationController
     render json: @inventory
   end
 
-  def updateCharacter
+  def updateCharactergaggss
     @character = Character.find(params[:idChar])
     @quest = Quest.find(params[:idQuest])
     @character.update(questsDone: @character.questsDone.push(params[@quest]))

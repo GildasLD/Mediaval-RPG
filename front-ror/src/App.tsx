@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import Quest from "./components/Quest";
 import Quests from "./components/Quests";
 import Register from "./components/Register";
+import Store from "./components/Store";
+
 LicenseInfo.setLicenseKey(
   "41bb5af2e7f0c0377375a0beeedfd1f6Tz01ODAxNDY3MixFPTE3MTAxNTMyNTA0NjAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y",
 );
@@ -19,9 +21,11 @@ export default function App() {
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="store" element={<Store />} />
           <Route path="characters" element={<CharacterSelector />} />
           <Route path="quests" element={<Quests />} />
           <Route path="quests">
+            <Route path="store" element={<Store />} />
             <Route path=":questId/:stageId" element={<Quest />} />
           </Route>
           <Route path="*" element={<NoMatch />} />
@@ -30,7 +34,6 @@ export default function App() {
     </div>
   );
 }
-
 function Layout() {
   return <Outlet />;
 }

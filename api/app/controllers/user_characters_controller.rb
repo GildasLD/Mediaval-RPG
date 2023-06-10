@@ -1,9 +1,14 @@
 class UserCharactersController < ApplicationController
+  before_action :set_user_character, only: %i[show update destroy]
   def index
     @user_characters = UserCharacter.all
     render json:
              @user_characters.eager_load(:character).as_json(
-               include: :character
+               include: {
+                 character: {
+                   only: %i[id name image description]
+                 }
+               }
              )
   end
 
@@ -11,7 +16,11 @@ class UserCharactersController < ApplicationController
     @user_characters = UserCharacter.where(user: params[:id])
     render json:
              @user_characters.eager_load(:character).as_json(
-               include: :character
+               include: {
+                 character: {
+                   only: %i[id name image description]
+                 }
+               }
              )
   end
 
@@ -32,36 +41,28 @@ class UserCharactersController < ApplicationController
     end
   end
 
+  # PATCH/PUT /user_characters/:id
+  def update
+    if sufficient_money_and_items?
+      @user_character = UserCharacter.find(params[:id])
+      update_values = user_character_params
+      update_values.each { |key, value| @user_character[key] += value.to_i }
+
+      if @user_character.save
+        render json: @user_character, status: :ok
+      else
+        render json: @user_character.errors, status: :unprocessable_entity
+      end
+    else
+      render json: {
+               error: "user_characters : Insufficient money or items !"
+             },
+             status: :bad_request
+    end
+  end
+
   def getOneUserCaracter
     @user_character = UserCharacter.find(params[:id])
-    render json: @user_character
-  end
-
-  def updateLifePoints
-    @user_character = UserCharacter.find(params[:id])
-    if @user_character.points > 0
-      @user_character.update(points: @user_character.points - 1)
-      @user_character.update(lifePoints: @user_character.lifePoints + 1)
-      render json: @user_character
-    else
-      render json: { errors: "Insufficient points" }, status: :bad_request
-    end
-  end
-
-  def updateStrength
-    @user_character = UserCharacter.find(params[:id])
-    if @user_character.points > 0
-      @user_character.update(points: @user_character.points - 1)
-      @user_character.update(strength: @user_character.strength + 1)
-      render json: @user_character
-    else
-      render json: { errors: "Insufficient points" }, status: :bad_request
-    end
-  end
-
-  def updateXp
-    @user_character = UserCharacter.find(params[:id])
-    @user_character.update(xp: @user_character.xp + params[:xp])
     render json: @user_character
   end
 
@@ -71,44 +72,34 @@ class UserCharactersController < ApplicationController
     render json: @user_character, status: :not_found
   end
 
-  def acceptQuest
-    @user_character = UserCharacter.find(params[:id])
-    @user_character.update(quests: @user_character.quests.push(params[:quest]))
-    @quest = Quest.find(params[:quest])
-    render json: @quest
-  end
-
   def getInventory
     @user_character = UserCharacter.find(params[:id])
+    puts @user_character.inspect
     @inventory = Inventory.find(@user_character.inventory)
     render json: @inventory
   end
 
-  def updateCharacter
-    @user_character = UserCharacter.find(params[:idChar])
-    @quest = Quest.find(params[:idQuest])
-    @user_character.update(
-      questsDone: @user_character.questsDone.push(params[@quest])
-    )
-    render json: @user_character
-  end
-
   private
 
+  def update_params
+    params.require(:user_character).permit!
+  end
+  def sufficient_money_and_items?
+    update_params.to_h.all? do |key, value|
+      int_value = value.to_i
+      int_value.negative? ? @user_character[key].to_i + value >= 0 : true
+    end
+  end
+
+  def set_user_character
+    @user_character = UserCharacter.find(params[:id])
+  end
+
   def character_params
-    params.require(:user_character).permit(:name)
+    params.require(:user_character).permit!
   end
 
   def user_character_params
-    params.require(:user_character).permit(
-      :user_id,
-      :level,
-      :lifePoints,
-      :points,
-      :strength,
-      :wisdom,
-      :xp,
-      character: %i[name image description]
-    )
+    params.require(:user_character).permit!
   end
 end

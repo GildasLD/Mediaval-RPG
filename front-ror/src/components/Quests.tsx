@@ -1,24 +1,9 @@
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthService from "../service/AuthService";
-import GamePlay from "../service/GamePlay";
-import {
-  Box,
-  Grid,
-  Paper,
-  Tab,
-  Tabs,
-  Typography,
-  Container,
-  FormControl,
-  TextField,
-  Button,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Image from "../helpers/ImageComponent";
+import GamePlay from "../service/GamePlay";
+
 const Quests = () => {
   const [quests, setQuests] = useState([]);
   const navigate = useNavigate();
@@ -26,7 +11,6 @@ const Quests = () => {
   useEffect(() => {
     console.warn(`🚀 > Quests > questId:`, questId);
   }, [questId]);
-
   useEffect(() => {
     GamePlay.getQuests()
       .then((res) => {
@@ -37,7 +21,6 @@ const Quests = () => {
         console.warn(`🚀 > handleLogin > err:`, JSON.stringify(err, null, 2));
       });
   }, []);
-
   return (
     <Box
       display="flex"

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :characters, through: :user_characters
   has_one :role
   has_one :inventory
+  after_create :initialize_inventory
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
@@ -23,5 +24,11 @@ class User < ApplicationRecord
         { value: login.strip.downcase }
       ]
     ).first
+  end
+
+  private
+
+  def initialize_inventory
+    create_inventory!(money: 300, helmet: 0, shield: 1, weapon: 0)
   end
 end

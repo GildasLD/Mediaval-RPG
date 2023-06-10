@@ -1,48 +1,51 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { sha256 } from "js-sha256";
 
 const API_URL = "http://localhost:3009";
 axios.defaults.withCredentials = true;
+
 class AuthService {
+  sha256sum = (string) => {
+    const cleanLogin = this.cleanLogin(string);
+    const hash = sha256(cleanLogin);
+    console.warn(`🚀 > file: AuthService.tsx:13 > AuthService > hash:`, hash);
+    return hash;
+  };
+
   login(login, password) {
     return axios
       .post(`${API_URL}/users/sign_in.json`, {
         user: {
           login,
-          password,
+          password: this.sha256sum(password),
         },
       })
       .then((response) => {
-        if (response.headers["access-token"]) {
-          const authHeaders = {
-            "access-token": response.headers["access-token"],
-            client: response.headers.client,
-            uid: response.headers.uid,
-          };
-          Cookies.set("authHeaders", authHeaders, { expires: 7 });
-        }
+        console.warn(
+          `🚀 > file: AuthService.tsx:23 > AuthService > .then > response:`,
+          response,
+        );
         return response.data;
       });
   }
-  register(username, email, password, passwordConfirmation) {
+
+  register(login, password) {
+    login = this.cleanLogin(login);
     return axios
       .post(`${API_URL}/users.json`, {
         user: {
-          username,
-          email,
-          password,
-          password_confirm: passwordConfirmation,
+          username: login,
+          email: `${login}${login}@epitech.eu`,
+          password: this.sha256sum(password),
+          password_confirm: this.sha256sum(password),
         },
       })
       .then((response) => {
-        if (response.headers["access-token"]) {
-          const authHeaders = {
-            "access-token": response.headers["access-token"],
-            client: response.headers.client,
-            uid: response.headers.uid,
-          };
-          Cookies.set("authHeaders", authHeaders, { expires: 7 });
-        }
+        console.warn(
+          `🚀 > file: AuthService.tsx:40 > AuthService > .then > response:`,
+          response,
+        );
         return response.data;
       });
   }
@@ -57,9 +60,11 @@ class AuthService {
         });
     }
   }
+
   isAuthenticated() {
     return !!Cookies.getJSON("authHeaders");
   }
+
   getCurrentUser() {
     return axios
       .get(`${API_URL}/users/current_user`)
@@ -68,7 +73,6 @@ class AuthService {
           `🚀 > file: AuthService.tsx:71 > AuthService > .then > response:`,
           response,
         );
-
         return response.data;
       })
       .catch((error) => {
@@ -78,6 +82,13 @@ class AuthService {
 
   getAuthHeaders() {
     return Cookies.getJSON("authHeaders");
+  }
+
+  cleanLogin(input) {
+    let result = input.toLowerCase();
+    result = result.replace(/\s+/g, "");
+    result = result.replace(/[^a-zA-Z0-9]/g, "");
+    return result;
   }
 }
 
