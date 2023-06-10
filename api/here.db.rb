@@ -4,9 +4,8 @@ User.create!(
       email: "gildas.le-drogoff@epitech.eu",
       username: "GildasLD",
       encrypted_password:
-        "$2a$12$ejaB1yPUV6wj3uG/JUYxB.GdtTZReTOYc8rYVmkuMNbrgBPoWF4Ha",
+        "$2a$12$yH32pTW20yCVbcyRVUieeeuxTaU7RBh4sIiNNK8MzLaIzunoKso66",
       role_id: 1,
-      inventory_id: 1,
       characters: [],
       xp: nil,
       quests: [],
@@ -26,9 +25,8 @@ User.create!(
       email: "gildas.le-drogoff+player@epitech.eu",
       username: "GildasLD-player",
       encrypted_password:
-        "$2a$12$VBMi6Lui7tL/WnBhoT4oqueIQ7INZ29pubZBZy02ULW0Xx3fl8iIm",
+        "$2a$12$Zx4/bJ3sapuaZJ5McFChrOEJXvlv/TnWo3v/JdbeEhVQgEy06cRue",
       role_id: 1,
-      inventory_id: 2,
       characters: [],
       xp: nil,
       quests: [],
@@ -48,9 +46,8 @@ User.create!(
       email: "gildas.le-drogoff+admin@epitech.eu",
       username: "GildasLD-admin",
       encrypted_password:
-        "$2a$12$SabfA5uVSx.pz64rtZJVZ.Yk6pXuAjJ77r9R1O2VTumhCpmbv/Yhu",
+        "$2a$12$5Ebomts7NkEL0laY3bG.R.vwfQ0qDjHAVvlsHpeqOXDjZ7SCFFdF6",
       role_id: 2,
-      inventory_id: 3,
       characters: [],
       xp: nil,
       quests: [],
@@ -70,9 +67,8 @@ User.create!(
       email: "gildas.le-drogoff+gamemaster@epitech.eu",
       username: "GildasLD-GameMaster",
       encrypted_password:
-        "$2a$12$8JqMDE3oz//TE5EmP1RokeJDXK35EltvkxFYjNEQlPtz.Ogb28J.W",
+        "$2a$12$kEPnewmu4oDNvVPLaAsS7e2Mlwg0Ny5RgQceSSZKFs.SHeIKOGP82",
       role_id: 3,
-      inventory_id: 4,
       characters: [],
       xp: nil,
       quests: [],
@@ -101,13 +97,31 @@ Character.create!(
 )
 Inventory.create!(
   [
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] },
-    { money: 250, helmet: 1, shield: 1, weapon: 1, items: [] }
+    {
+      user_id: 1,
+      money: 300,
+      helmet: 100,
+      shield: 100,
+      weapon: 100,
+      items: []
+    },
+    {
+      user_id: 2,
+      money: 300,
+      helmet: 100,
+      shield: 100,
+      weapon: 100,
+      items: []
+    },
+    {
+      user_id: 3,
+      money: 300,
+      helmet: 100,
+      shield: 100,
+      weapon: 100,
+      items: []
+    },
+    { user_id: 4, money: 300, helmet: 100, shield: 100, weapon: 100, items: [] }
   ]
 )
 NonPlayerCharacter.create!(
@@ -116,33 +130,42 @@ NonPlayerCharacter.create!(
       stage_id: 2,
       character_id: 5,
       inventory_id: 2,
+      helmet: nil,
+      shield: nil,
+      weapon: nil,
       level: 5,
       lifePoints: 100,
       points: 0,
       strength: 100,
-      wisdom: 0,
+      defense: 0,
       xp: 100
     },
     {
       stage_id: 2,
       character_id: 2,
       inventory_id: 1,
+      helmet: nil,
+      shield: nil,
+      weapon: nil,
       level: 5,
       lifePoints: 100,
       points: 0,
       strength: 100,
-      wisdom: 0,
+      defense: 0,
       xp: 100
     },
     {
       stage_id: 1,
       character_id: 1,
       inventory_id: 3,
+      helmet: nil,
+      shield: nil,
+      weapon: nil,
       level: 1,
       lifePoints: 50,
       points: 0,
       strength: 50,
-      wisdom: 0,
+      defense: 0,
       xp: 50
     }
   ]
@@ -248,34 +271,43 @@ Stage.create!(
 UserCharacter.create!(
   [
     {
-      user_id: 1,
-      character_id: 5,
-      level: 5,
-      lifePoints: 100,
-      points: 0,
-      strength: 100,
-      wisdom: 0,
-      xp: 100
-    },
-    {
-      user_id: 1,
-      character_id: 2,
-      level: 5,
-      lifePoints: 100,
-      points: 0,
-      strength: 100,
-      wisdom: 0,
-      xp: 100
-    },
-    {
       user_id: 2,
-      character_id: 1,
+      character_id: 5,
+      helmet: 0,
+      shield: 0,
+      weapon: 0,
       level: 1,
       lifePoints: 50,
       points: 0,
       strength: 50,
-      wisdom: 0,
+      defense: 0,
+      xp: 200
+    },
+    {
+      user_id: 1,
+      character_id: 1,
+      helmet: 0,
+      shield: 0,
+      weapon: 3,
+      level: 5,
+      lifePoints: 100,
+      points: 0,
+      strength: 200,
+      defense: 0,
       xp: 50
+    },
+    {
+      user_id: 1,
+      character_id: 2,
+      helmet: 20,
+      shield: 20,
+      weapon: 11,
+      level: 5,
+      lifePoints: 100,
+      points: 0,
+      strength: 100,
+      defense: 0,
+      xp: 100
     }
   ]
 )

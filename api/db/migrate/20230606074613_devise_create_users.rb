@@ -10,7 +10,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       ## Role
       t.references :role, null: false, foreign_key: true, default: 1
-      t.references :inventory, null: true, foreign_key: true
 
       ## Quests
       t.integer :characters, array: true, null: true, default: []

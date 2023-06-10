@@ -1,44 +1,25 @@
+import { Box, Button, FormControl, Grid, TextField } from "@mui/material";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../service/AuthService";
-import {
-  Box,
-  Grid,
-  Paper,
-  Tab,
-  Tabs,
-  Typography,
-  Container,
-  FormControl,
-  TextField,
-  Button,
-  InputLabel,
-} from "@mui/material";
 
 const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const userInput = useRef();
   const handleLogin = () => {
     AuthService.login(login, password)
-      .then(async (res) => {
-        console.warn(`🚀 > file: Login.tsx:16 > .then > res:`, res);
+      .then((res) => {
         let currentUser = res;
-        Cookies.remove("currrent-user", { path: "" });
-        Cookies.set("currrent-user", JSON.stringify(currentUser), {
+        Cookies.remove("current-user", { path: "" });
+        Cookies.set("current-user", JSON.stringify(currentUser), {
           sameSite: "None",
           secure: true,
-          expires: 2,
+          expires: 7,
         });
-
-        // let test = JSON.parse(Cookies.get(
-        //   "currrent-user"
-        // ));
-        // console.warn(`🚀 > file: Login.tsx:24 > .then > test:`,   test);
-
         // navigate("/quests/1/1");
         navigate("/characters");
       })
@@ -48,9 +29,15 @@ const Login = () => {
       });
   };
   const handleRegister = () => {
-    navigate("/register");
+    AuthService.register(login, password)
+      .then(async (res) => {
+        console.warn(`🚀 > file: Login.tsx:34 > .then > res:`, res);
+      })
+      .catch((err) => {
+        console.warn(`🚀 > handleRegister > err:`, err);
+        setError("Invalid login or password");
+      });
   };
-
   return (
     <Box
       display="flex"
@@ -67,7 +54,6 @@ const Login = () => {
             placeholder="Login"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            defaultValue="Small"
             variant="filled"
             size="small"
           />
@@ -76,7 +62,6 @@ const Login = () => {
           <TextField
             hiddenLabel
             id="filled-hidden-label-small"
-            defaultValue="Small"
             variant="filled"
             size="small"
             name="password"
@@ -106,11 +91,9 @@ const Login = () => {
             </Button>
           </Grid>
         </Grid>
-
         {error && <p>{error}</p>}
       </Grid>
     </Box>
   );
 };
-
 export default Login;

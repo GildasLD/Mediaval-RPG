@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 const UserDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
   return (
     <div>
       <h1>User Details</h1>
@@ -13,5 +12,4 @@ const UserDetails = () => {
     </div>
   );
 };
-
 export default UserDetails;

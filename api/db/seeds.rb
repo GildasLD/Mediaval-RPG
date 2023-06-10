@@ -12,55 +12,61 @@
 #   password_confirmation: 'bob'
 # )
 
+require "digest"
+
+def hash_password(password)
+  Digest::SHA256.hexdigest(password)
+end
+
 roles = [{ role: "Player" }, { role: "Admin" }, { role: "GameMaster" }]
 roles.each { |role| Role.create!(role) }
-
-inventories = [
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 },
-  { helmet: 1, shield: 1, weapon: 1 }
-]
-inventories.each { |inventory| Inventory.create!(inventory) }
 
 users = [
   {
     email: "gildas.le-drogoff@epitech.eu",
     username: "GildasLD",
-    password: "bob",
-    password_confirmation: "bob",
-    role_id: 1,
-    inventory_id: 1
+    password: hash_password("bob"),
+    password_confirmation: hash_password("bob"),
+    role_id: 1
   },
   {
     email: "gildas.le-drogoff+player@epitech.eu",
     username: "GildasLD-player",
-    password: "bob",
-    password_confirmation: "bob",
-    role_id: 1,
-    inventory_id: 2
+    password: hash_password("bob"),
+    password_confirmation: hash_password("bob"),
+    role_id: 1
   },
   {
     email: "gildas.le-drogoff+admin@epitech.eu",
     username: "GildasLD-admin",
-    password: "bob",
-    password_confirmation: "bob",
-    role_id: 2,
-    inventory_id: 3
+    password: hash_password("bob"),
+    password_confirmation: hash_password("bob"),
+    role_id: 2
   },
   {
     email: "gildas.le-drogoff+GameMaster@epitech.eu",
     username: "GildasLD-GameMaster",
-    password: "bob",
-    password_confirmation: "bob",
-    role_id: 3,
-    inventory_id: 4
+    password: hash_password("bob"),
+    password_confirmation: hash_password("bob"),
+    role_id: 3
   }
 ]
+# users.each do |user_attributes|
+#   user = User.new(user_attributes)
+#   inventory = Inventory.create!(money: 500, helmet: 2, shield: 1, weapon: 1)
+#   user.inventory = inventory
+#   user.save!
+# end
+
 users.each { |user| User.create!(user) }
+
+# inventories = [
+#   { helmet: 1, shield: 0, weapon: 1 },
+#   { helmet: 1, shield: 1, weapon: 1 },
+#   { helmet: 1, shield: 1, weapon: 1 },
+#   { helmet: 1, shield: 1, weapon: 1 }
+# ]
+# inventories.each { |inventory| Inventory.create!(inventory) }
 
 quests = [
   { name: "dragon", description: "Dragon", image: "dragon" },
@@ -166,7 +172,7 @@ non_player_characters = [
     lifePoints: 100,
     points: 0,
     strength: 100,
-    wisdom: 0,
+    defense: 0,
     xp: 100,
     inventory_id: 2
   },
@@ -177,7 +183,7 @@ non_player_characters = [
     lifePoints: 100,
     points: 0,
     strength: 100,
-    wisdom: 0,
+    defense: 0,
     xp: 100,
     inventory_id: 1
   },
@@ -188,7 +194,7 @@ non_player_characters = [
     lifePoints: 50,
     points: 0,
     strength: 50,
-    wisdom: 0,
+    defense: 0,
     xp: 50,
     inventory_id: 3
   }
@@ -201,34 +207,38 @@ end
 user_characters = [
   {
     user_id: 1,
-    character_id: 5,
-    level: 5,
+    character_id: 1,
+    level: 1,
     lifePoints: 100,
     points: 0,
-    strength: 100,
-    wisdom: 0,
-    xp: 100
+    strength: 10,
+    defense: 10,
+    xp: 10
   },
   {
     user_id: 1,
     character_id: 2,
     level: 5,
     lifePoints: 100,
-    points: 0,
-    strength: 100,
-    wisdom: 0,
+    points: 50,
+    strength: 50,
+    defense: 50,
     xp: 100
   },
   {
     user_id: 2,
-    character_id: 1,
-    level: 1,
+    character_id: 3,
+    level: 2,
     lifePoints: 50,
-    points: 0,
+    points: 50,
     strength: 50,
-    wisdom: 0,
-    xp: 50
+    defense: 50,
+    xp: 200
   }
 ]
 
 user_characters.each { |user_character| UserCharacter.create!(user_character) }
+
+UserCharacter.all.each do |user_character|
+  user_character.update!(helmet: 0, shield: 0, weapon: 0)
+end

@@ -11,7 +11,6 @@ class CreateStore < ActiveRecord::Migration[7.0]
       t.integer :speed
       t.integer :strength
       t.integer :weapon
-      t.integer :wisdom
     end
   end
 end

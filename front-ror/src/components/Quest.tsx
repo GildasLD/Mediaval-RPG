@@ -1,32 +1,17 @@
+import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import QuestStage from "./QuestStage";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
+
 const Quest = () => {
   const [choice, setChoice] = useState(null); // 'riddle' or 'fight'
   let { questId, stageId } = useParams();
   const renderRiddleChallenge = () => {
     return <QuestStage questId={questId} stageId={stageId} />;
   };
-
   const renderFightChallenge = () => {
     return <div>Détails du combat ici...</div>;
   };
-
   const renderChoiceButtons = () => {
     return (
       <Box
@@ -54,7 +39,6 @@ const Quest = () => {
       </Box>
     );
   };
-
   return (
     <div>
       {choice === null && renderChoiceButtons()}
@@ -63,5 +47,4 @@ const Quest = () => {
     </div>
   );
 };
-
 export default Quest;

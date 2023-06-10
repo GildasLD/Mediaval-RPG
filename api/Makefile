@@ -7,16 +7,19 @@
 # rake db:create && \
 # rake db:migrate && \
 # rake db:seed && \
+# gem install rake;
 
-start: clean-database lint
+start: clean-database
 	bundle config set --local path vendor/bundle;
 	bundle install --gemfile=Gemfile;
+	npm install --force;
+	npx prettier --plugin=@prettier/plugin-ruby --write '{,!(vendor)/**/}*.rb*'
 	rake db:drop && \
 	rake db:create && \
 	rake db:migrate && \
 	rake db:seed && \
-	RAILS_ENV=development rails assets:precompile && \
-	rails server;
+	bundle exec rails assets:precompile && \
+	bundle exec rails server;
 
 clean-database:
 	psql -U wac --host=127.0.0.1 --port=2345 \
@@ -37,3 +40,11 @@ server: lint
 
 s: lint
 	rails server;
+
+new-credentials:
+	rm -rfv ./config/{master.key,credentials.yml.enc} && \
+	rails credentials:edit;
+dump:
+	rm -rf here.db.rb;
+	rake db:seed:dump FILE=here.db.rb;
+

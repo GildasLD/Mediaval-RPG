@@ -1,7 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import backgroundImage from "./assets/images/bg.jpg";
 
-import { red } from "@mui/material/colors";
 const theme = createTheme({
   components: {
     MuiCssBaseline: {
@@ -15,20 +13,31 @@ const theme = createTheme({
           height: "100vh",
           width: "100vw",
         },
+        button: {
+          backGroundColor: "#577581",
+        },
       },
     },
   },
   palette: {
     primary: {
-      main: "#556cd6",
+      main: "#2e5846",
     },
     secondary: {
-      main: "#19857b",
+      main: "#007398",
     },
     error: {
-      main: red.A400,
+      main: "#bd4d2e",
+    },
+    warning: {
+      main: "#283e51",
+    },
+    info: {
+      main: "#0090c4",
+    },
+    success: {
+      main: "#4a8548",
     },
   },
 });
-
 export default theme;

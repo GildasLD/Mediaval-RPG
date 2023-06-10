@@ -44,7 +44,7 @@ Un PNJ dipose également d’un avatar.
 
 Vous devez créer une page d’accueil qui permet de créer un nouveau personnage ou choisir un personnage déjà existant. Ensuite, vous devez avoir un menu qui permet de :
 
-- [] Consulter ses caractéristiques.
+- [*] Consulter ses caractéristiques.
 - [] Gérer son inventaire.
 - [] Choisir une nouvelle quête dans une liste ou continuer une quête en cours.
 - [] Avoir accès à l’énigme et aux différentes options possibles.

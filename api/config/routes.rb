@@ -8,9 +8,23 @@ Rails.application.routes.draw do
   # Users
   # get "/users/current_user", to: "users#current"
   # post "/users/me", to: "users#check_token"
-  put "users/:id/update", to: "users#update"
+  resources :users
+  get "users/", to: "users#index"
   get "users/:id", to: "users#show"
+  put "users/:id/update", to: "users#update"
+  resources :users do
+    resources :inventories, only: %i[index new create update]
+  end
+  resources :users, shallow: true do
+    resources :inventories, shallow: true
+  end
 
+  # Inventories
+  resources :inventories, defaults: { format: :json }
+  get "/inventories", to: "inventories#index"
+  get "/inventories/:id", to: "inventories#show"
+  post "/inventories", to: "inventories#create"
+  patch "/inventories/:id", to: "inventories#update"
   # Quests
   resources :quests
   delete "/quests/:id", to: "quests#destroy"
@@ -42,8 +56,9 @@ Rails.application.routes.draw do
   put "/characters/updateXp", to: "characters#updateXp"
 
   # User Characters
-  resources :user_characters, only: %i[new index show create destroy]
+  resources :user_characters #, defaults: { format: :json }
   get "/user_characters", to: "user_characters#index"
   get "/user_characters/:id", to: "user_characters#show"
   post "/user_characters/create", to: "user_characters#create"
+  patch "/user_characters/:id", to: "user_characters#update"
 end

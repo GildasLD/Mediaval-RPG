@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 
 const Dashboard = lazy(() => import("./Dashboard"));
-
 const Home = () => {
   return (
     <div className="bg">
@@ -11,5 +10,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
