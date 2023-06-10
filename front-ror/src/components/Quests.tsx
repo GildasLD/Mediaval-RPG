@@ -33,27 +33,43 @@ const Quests = () => {
         padding: "2em 5em",
       }}
     >
-      {quests.map((quest) => (
-        <>
-          <Box
-            style={{
-              padding: "2em 1em",
-            }}
-            onClick={() => {
-              navigate(`/quests/${quest.id}/1`);
-            }}
-            className=" "
-          >
-            <Image imageName={quest.image} />
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="flex-end"
+        flexDirection="row"
+        // minHeight="60vh"
+        // maxWidth="100vh"
+        sx={{
+          p: 1,
+          color: "#272727",
+          bgcolor: "#ffffffa6",
+          boxShadow: 3,
+          borderRadius: 2,
+        }}
+      >
+        {quests.map((quest) => (
+          <>
             <Box
-              className="bg-white p-1 rounded img-description bg-opacity-40"
-              key={quest.id}
+              style={{
+                padding: "2em 1em",
+              }}
+              onClick={() => {
+                navigate(`/quests/${quest.id}/1`);
+              }}
+              className=" "
             >
-              {quest.description}{" "}
+              <Image imageName={quest.image} />
+              <Box
+                className="bg-white p-1 rounded img-description bg-opacity-40"
+                key={quest.id}
+              >
+                {quest.description}{" "}
+              </Box>
             </Box>
-          </Box>
-        </>
-      ))}
+          </>
+        ))}
+      </Box>
     </Box>
   );
 };

@@ -7,7 +7,7 @@ class InventoriesController < ApplicationController
     render json: @inventories
   end
 
-  # GET /inventories/:id
+  # GET /inventories/:user_id
   def show
     render json: @inventory
   end
@@ -24,12 +24,12 @@ class InventoriesController < ApplicationController
   end
 
   def decrement_money
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.find_by(user_id: params[:user_id])
     @inventory.money -= params[:money]
     @inventory.save
   end
 
-  # PATCH/PUT /inventories/:id
+  # PATCH/PUT /inventories/:user_id
   def update
     if sufficient_money_and_items?
       update_params.each { |key, value| @inventory.increment(key, value) }
@@ -46,7 +46,7 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # DELETE /inventories/:id
+  # DELETE /inventories/:user_id
   def destroy
     @inventory.destroy
     head :no_content
@@ -56,23 +56,23 @@ class InventoriesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_inventory
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.find_by(user_id: params[:id])
+    Rails.logger.debug "Inventory object: #{@inventory.inspect}"
+    unless @inventory
+      render json: { error: "Inventory not found" }, status: :not_found
+    end
   end
+
   def update_params
-    params.require(:inventory).permit(:money, :helmet, :shield, :weapon, :items)
+    params.require(:inventory).permit!
   end
   def sufficient_money_and_items?
     update_params.to_h.all? do |key, value|
-      value.negative? ? @inventory[key].to_i + value >= 0 : true
+      value.negative? ? @inventory.send(key).to_i + value >= 0 : true
     end
   end
+
   def inventory_params
-    params.require(:inventory).permit(
-      :money,
-      :helmet,
-      :shield,
-      :weapon,
-      items: []
-    )
+    params.require(:inventory).permit!
   end
 end

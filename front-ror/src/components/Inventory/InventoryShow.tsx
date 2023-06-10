@@ -16,9 +16,9 @@ const Demo = styled("div")(({ theme }) => ({
   borderRadius: ".4em",
 }));
 const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
-  const [username, setUsername] = useState("");
-
   const refUser = useRef(0);
+  const userId = refUser.current.id;
+  const [username, setUsername] = useState("");
 
   const handleUpdate = (newInventory) => {
     const updatedInventory = {
@@ -72,6 +72,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
         <Typography variant="h6" component="div">
           Inventaire
         </Typography>
+
         <Demo>
           <List dense={true}>
             <ListItem sx={{ mr: 16 }}>
@@ -87,7 +88,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
               </Button>
               <Button
                 onClick={() => {
-                  GamePlay.updateInventory(selectedCharacter, "helmet").then(
+                  GamePlay.updateInventory(userId, "helmet").then(
                     (response) => {
                       console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
@@ -108,7 +109,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
               </Button>
               <Button
                 onClick={() => {
-                  GamePlay.updateInventory(selectedCharacter, "shield").then(
+                  GamePlay.updateInventory(userId, "shield").then(
                     (response) => {
                       console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
@@ -129,7 +130,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
               </Button>
               <Button
                 onClick={() => {
-                  GamePlay.updateInventory(selectedCharacter, "weapon").then(
+                  GamePlay.updateInventory(userId, "weapon").then(
                     (response) => {
                       console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
@@ -151,6 +152,9 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
             </ListItem>
           </List>
         </Demo>
+        <small style={{ padding: 1, color: "#ababab", margin: 0 }}>
+          {JSON.stringify(selectedCharacter, null, 2)}
+        </small>
       </Box>
     </div>
   );

@@ -35,22 +35,29 @@ const CharacterSelector = () => {
   useEffect(() => {
     let currentUser = getLocalUser();
     if (currentUser) {
-      console.warn(
-        `🚀 > file: CharacterSelector.tsx:26 > useEffect > currentUser:`,
-        currentUser,
-      );
+      // console.warn(
+      //   `🚀 > file: CharacterSelector.tsx:26 > useEffect > currentUser:`,
+      //   currentUser,
+      // );
       refUser.current = currentUser;
     }
   }, []);
   useEffect(() => {
-    console.warn(`🚀 > file: inventory:`, JSON.stringify(inventory));
+
+    console.warn(
+      `🚀 > file: CharacterSelector.tsx:49 > useEffect > currentUser:`,
+      selectedCharacter,
+    );
+
+  }, [selectedCharacter]);
+  useEffect(() => {
+    // console.warn(`🚀 > file: inventory:`, JSON.stringify(inventory));
     fetchUserCharacters();
     fetchInventory();
   }, []);
   const fetchUserCharacters = () => {
     GamePlay.fetchUserCharacters()
       .then((response) => {
-        console.warn("\n > .then > response:", response);
         if (response.length > 0) {
           // setSelectedCharacter(response[0].id);
         }
@@ -131,6 +138,9 @@ const CharacterSelector = () => {
           >
             <b>Sélectionner</b>
           </Typography>
+          {/* <pre style={{ padding: 10, color: "black" }}>
+            {JSON.stringify(selectedCharacter, null, 2)} selecteChar
+          </pre> */}
           <FormControl size="small">
             <Select
               style={{ padding: "0.5rem", color: "#000", margin: "0" }}
@@ -141,7 +151,10 @@ const CharacterSelector = () => {
               onChange={(e) => setSelectedCharacter(e.target.value)}
             >
               {characters.map((character) => (
-                <MenuItem key={character.id} value={character.id}>
+                <MenuItem
+                  key={character.character_id}
+                  value={character.character_id}
+                >
                   {character.character.name}
                 </MenuItem>
               ))}

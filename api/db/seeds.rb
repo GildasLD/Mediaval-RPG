@@ -30,13 +30,6 @@ users = [
     role_id: 1
   },
   {
-    email: "gildas.le-drogoff+player@epitech.eu",
-    username: "GildasLD-player",
-    password: hash_password("bob"),
-    password_confirmation: hash_password("bob"),
-    role_id: 1
-  },
-  {
     email: "gildas.le-drogoff+admin@epitech.eu",
     username: "GildasLD-admin",
     password: hash_password("bob"),
