@@ -5,8 +5,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background: url(https://gildasld.github.io/static-images/images/ror-bg.jpg)
-    no-repeat center fixed !important;
+  background: url("/ror-bg.jpg") no-repeat center fixed !important;
   height: 100vh !important;
   width: 100vw !important;
   margin: 0;
@@ -283,7 +282,6 @@ template {
   margin-top: 1em;
   padding: 0.5em 0;
 }
-
 .riddles--suggestions > button {
   background-color: #80140a;
 }
@@ -292,4 +290,4 @@ template {
   margin: 1em;
   color: white;
   background-color: #2c578e;
-}
+} /*# sourceMappingURL=index.css.map */

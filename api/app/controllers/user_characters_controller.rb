@@ -30,7 +30,10 @@ class UserCharactersController < ApplicationController
     character = Character.find_or_create_by(character_attributes)
     user_character =
       UserCharacter.new(user_character_params.merge(character: character))
+
     if user_character.save
+      # Inventory.create(user: user_character.user)
+
       @user_characters = UserCharacter.where(id: user_character.id)
       render json:
                @user_characters.eager_load(:character).as_json(
@@ -44,7 +47,6 @@ class UserCharactersController < ApplicationController
   # PATCH/PUT /user_characters/:id
   def update
     if sufficient_money_and_items?
-      @user_character = UserCharacter.find(params[:id])
       update_values = user_character_params
       update_values.each { |key, value| @user_character[key] += value.to_i }
 
@@ -62,18 +64,19 @@ class UserCharactersController < ApplicationController
   end
 
   def getOneUserCaracter
-    @user_character = UserCharacter.find(params[:id])
+    @user_character = UserCharacter.find_by(user_character: params[:id])
     render json: @user_character
   end
 
   def destroy
-    @user_character = UserCharacter.find(params[:id])
+    @user_character = UserCharacter.find_by(user_character: params[:id])
+    Inventory.find_by(id: @user_character.id)&.destroy
     @user_character.destroy
     render json: @user_character, status: :not_found
   end
 
   def getInventory
-    @user_character = UserCharacter.find(params[:id])
+    @user_character = UserCharacter.find_by(user_character: params[:id])
     puts @user_character.inspect
     @inventory = Inventory.find(@user_character.inventory)
     render json: @inventory
@@ -92,7 +95,11 @@ class UserCharactersController < ApplicationController
   end
 
   def set_user_character
-    @user_character = UserCharacter.find(params[:id])
+    @user_character =
+      UserCharacter.find_by(character_id: params[:id] || params[:character_id])
+    unless @user_character
+      render json: { error: "UserCharacter not found" }, status: :not_found
+    end
   end
 
   def character_params

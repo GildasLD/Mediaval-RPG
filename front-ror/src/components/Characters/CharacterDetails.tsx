@@ -33,7 +33,7 @@ const CharacterDetails = ({
   const userID = refUser.current.id;
   const [inventory, setInventory] = useState([]);
   let characterToDisplay = characters.find((character) => {
-    return character.id === selectedCharacter;
+    return character.character_id === selectedCharacter;
   });
   const handleUpdate = () => {
     onUpdateCharacter();
@@ -97,21 +97,19 @@ const CharacterDetails = ({
               <ListItem sx={{ mr: 16 }}>
                 <Button
                   onClick={() => {
-                    GamePlay.updateInventory(
-                      characterToDisplay.character_id,
-                      "helmet",
-                      1,
-                    ).then((response) => {
-                      console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        characterToDisplay.character_id,
-                        "helmet",
-                        -1,
-                      ).then((response) => {
-                        console.warn("updateUserCharacters => ", response);
-                        handleUpdate();
-                      });
-                    });
+                    GamePlay.updateInventory(userID, "helmet", 1).then(
+                      (response) => {
+                        console.warn("response => ", response);
+                        GamePlay.updateUserCharacters(
+                          characterToDisplay.character_id,
+                          "helmet",
+                          -1,
+                        ).then((response) => {
+                          console.warn("updateUserCharacters => ", response);
+                          handleUpdate();
+                        });
+                      },
+                    );
                   }}
                   sx={{ mr: 1 }}
                   variant="outlined"
@@ -123,21 +121,19 @@ const CharacterDetails = ({
                 </Button>
                 <Button
                   onClick={() => {
-                    GamePlay.updateInventory(
-                      characterToDisplay.character_id,
-                      "shield",
-                      1,
-                    ).then((response) => {
-                      console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        characterToDisplay.character_id,
-                        "shield",
-                        -1,
-                      ).then((response) => {
-                        console.warn("updateUserCharacters => ", response);
-                        handleUpdate();
-                      });
-                    });
+                    GamePlay.updateInventory(userID, "shield", 1).then(
+                      (response) => {
+                        console.warn("response => ", response);
+                        GamePlay.updateUserCharacters(
+                          characterToDisplay.character_id,
+                          "shield",
+                          -1,
+                        ).then((response) => {
+                          console.warn("updateUserCharacters => ", response);
+                          handleUpdate();
+                        });
+                      },
+                    );
                   }}
                   sx={{ mr: 1 }}
                   variant="outlined"
@@ -149,21 +145,23 @@ const CharacterDetails = ({
                 </Button>
                 <Button
                   onClick={() => {
-                    GamePlay.updateInventory(
-                      characterToDisplay.character_id,
-                      "weapon",
-                      1,
-                    ).then((response) => {
-                      console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        characterToDisplay.character_id,
-                        "weapon",
-                        -1,
-                      ).then((response) => {
-                        console.warn("updateUserCharacters => ", response);
-                        handleUpdate();
-                      });
-                    });
+                    GamePlay.updateInventory(userID, "weapon", 1).then(
+                      (response) => {
+                        console.warn(
+                          "\n🚀 > file : front-ror/src/components/Characters/CharacterDetails.tsx:157 > ).then > response:",
+                          response,
+                        );
+
+                        GamePlay.updateUserCharacters(
+                          characterToDisplay.character_id,
+                          "weapon",
+                          -1,
+                        ).then((response) => {
+                          console.warn("updateUserCharacters => ", response);
+                          handleUpdate();
+                        });
+                      },
+                    );
                   }}
                   sx={{ mr: 1 }}
                   variant="outlined"
@@ -177,6 +175,14 @@ const CharacterDetails = ({
             </Box>
           </List>
         </Demo>
+        {/* <div>
+          <br />
+          <pre style={{ padding: 1, color: "#000000cc" }}>
+            <small>
+              {JSON.stringify(characterToDisplay, (key, value) => ["shield", "helmet", "weapon", "level", "lifePoints", "strength", "points", "defense", "xp"].includes(key) ? undefined : value, 2)}
+            </small>
+          </pre>
+        </div> */}
       </Box>
     </div>
   );
