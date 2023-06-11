@@ -25,10 +25,10 @@ class GamePlay {
         return response.data;
       })
       .catch((error) => {
-        console.warn(
-          `🚀 > file: GamePlay.tsx:29 > GamePlay > createCharacter > error:`,
-          error,
-        );
+        // console.warn(
+        //   `🚀 > file: GamePlay.tsx:29 > GamePlay > createCharacter > error:`,
+        //   error,
+        // );
       });
   }
 
@@ -39,10 +39,10 @@ class GamePlay {
         return response.data;
       })
       .catch((error) => {
-        console.warn(
-          `🚀 > file: GamePlay.tsx:39 > GamePlay > returnaxios.get > error:`,
-          error,
-        );
+        // console.warn(
+        //   `🚀 > file: GamePlay.tsx:39 > GamePlay > returnaxios.get > error:`,
+        //   error,
+        // );
 
         return error;
       });
@@ -69,10 +69,10 @@ class GamePlay {
         );
         return;
     }
-    console.warn(
-      "\n🚀 > file : front-ror/src/service/GamePlay.tsx:53 > GamePlay > updateUserCharacters > data:",
-      data,
-    );
+    // console.warn(
+    //   "\n🚀 > file : front-ror/src/service/GamePlay.tsx:53 > GamePlay > updateUserCharacters > data:",
+    //   data,
+    // );
     return axios
       .request({
         method: "PATCH",
@@ -81,10 +81,10 @@ class GamePlay {
         data: data,
       })
       .then((response) => {
-        console.warn(
-          "\n🚀 > file : front-ror/src/service/GamePlay.tsx:62 > GamePlay > .then > response:",
-          response,
-        );
+        // console.warn(
+        //   "\n🚀 > file : front-ror/src/service/GamePlay.tsx:62 > GamePlay > .then > response:",
+        //   response,
+        // );
         return response.data;
       });
   }
@@ -100,11 +100,10 @@ class GamePlay {
         },
       })
       .then((response) => {
-        console.warn(
-          `🚀 > file: GamePlay.tsx:58 > GamePlay > .then > response:`,
-          response.data,
-        );
-
+        // console.warn(
+        //   `🚀 > file: GamePlay.tsx:58 > GamePlay > .then > response:`,
+        //   response.data,
+        // );
         return response.data;
       });
   }

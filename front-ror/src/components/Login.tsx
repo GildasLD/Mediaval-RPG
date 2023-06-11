@@ -9,19 +9,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const userInput = useRef();
+  const isAdmin = (loggedInUser) => {
+    if (loggedInUser.role === "GameMaster") {
+      return true;
+    }
+  };
   const handleLogin = () => {
     AuthService.login(login, password)
       .then((res) => {
-        let currentUser = res;
+        let loggedInUser = res;
+        isAdmin(loggedInUser) && {
+          ...loggedInUser,
+          isAdmin: true,
+        };
         Cookies.remove("current-user", { path: "" });
-        Cookies.set("current-user", JSON.stringify(currentUser), {
+        Cookies.set("current-user", JSON.stringify(loggedInUser), {
           sameSite: "None",
           secure: true,
           expires: 7,
         });
-        // navigate("/quests/1/1");
-        navigate("/characters");
+
+        // navigate("/characters");
       })
       .catch((err) => {
         console.warn(`🚀 > handleLogin > err:`, err);

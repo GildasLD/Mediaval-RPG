@@ -1,4 +1,4 @@
-const Image = (imageName) => {
+const Image = (imageName: string) => {
   imageName = imageName.imageName ?? "lizard";
   const imagePath = `src/assets/images/${imageName}.jpg`;
   return (

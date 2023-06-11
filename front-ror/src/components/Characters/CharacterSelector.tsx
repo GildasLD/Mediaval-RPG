@@ -7,29 +7,38 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef } from "react";
 import { getLocalUser } from "../../helpers/User";
-import GamePlay from "../../service/GamePlay";
 import InventoryShow from "../Inventory/InventoryShow";
 import CharacterDetails from "./CharacterDetails";
 import { useNavigate } from "react-router-dom";
+import { useCharacterSelector } from "./hooks/useCharacterSelector";
 
 const CharacterSelector = () => {
-  const [characters, setCharacters] = useState([]);
-  const [selectedCharacter, setSelectedCharacter] = useState(1);
-  const [newCharacterName, setNewCharacterName] = useState("");
-  const [inventory, setInventory] = useState({});
+  const {
+    characters,
+    selectedCharacter,
+    setSelectedCharacter,
+    newCharacterName,
+    setNewCharacterName,
+    inventory,
+    setInventory,
+    createCharacter,
+    fetchUserCharacters,
+    fetchInventory,
+  } = useCharacterSelector();
+
   const navigate = useNavigate();
   // Character
-  const updateInventory = async (updatedInventory) => {
+  const updateInventory = async (updatedInventory: { newInventory: any }) => {
     const newInventory = updatedInventory.newInventory;
     setInventory(newInventory);
     updateCharacter();
-    await fetchInventory();
+    fetchInventory();
   };
   const updateCharacter = async () => {
-    await fetchUserCharacters();
+    fetchUserCharacters();
   };
   const refUser = useRef(0);
   useEffect(() => {
@@ -43,54 +52,17 @@ const CharacterSelector = () => {
     }
   }, []);
   useEffect(() => {
-
-    console.warn(
-      `🚀 > file: CharacterSelector.tsx:49 > useEffect > currentUser:`,
-      selectedCharacter,
-    );
-
+    // console.warn(
+    //   `🚀 > file: CharacterSelector.tsx:49 > useEffect > currentUser:`,
+    //   selectedCharacter,
+    // );
   }, [selectedCharacter]);
   useEffect(() => {
     // console.warn(`🚀 > file: inventory:`, JSON.stringify(inventory));
     fetchUserCharacters();
     fetchInventory();
   }, []);
-  const fetchUserCharacters = () => {
-    GamePlay.fetchUserCharacters()
-      .then((response) => {
-        if (response.length > 0) {
-          // setSelectedCharacter(response[0].id);
-        }
-        setCharacters(response);
-        fetchInventory();
-      })
-      .catch((error) => {
-        console.error("Error fetching characters:", error);
-      });
-  };
 
-  const fetchInventory = () => {
-    const userId = refUser.current.id;
-    if (userId != null) {
-      GamePlay.fetchUser(userId)
-        .then((response) => {
-          setInventory(response.inventory);
-        })
-        .catch((error) => {
-          console.error("Error fetching inventory :", error);
-        });
-    }
-  };
-  const createCharacter = () => {
-    GamePlay.createCharacter(newCharacterName)
-      .then((response) => {
-        fetchUserCharacters();
-        setNewCharacterName("");
-      })
-      .catch((error) => {
-        console.error("Error creating character:", error);
-      });
-  };
   const handleUseCharacter = () => {
     navigate("/quests");
   };
@@ -144,8 +116,6 @@ const CharacterSelector = () => {
           <FormControl size="small">
             <Select
               style={{ padding: "0.5rem", color: "#000", margin: "0" }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={selectedCharacter}
               label="Personnage"
               onChange={(e) => setSelectedCharacter(e.target.value)}

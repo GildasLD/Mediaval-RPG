@@ -1,19 +1,14 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Cookies from "js-cookie";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { getLocalUser } from "../../helpers/User";
-import GamePlay from "../../service/GamePlay";
 
-const Demo = styled("div")(({ theme }) => ({
+import CharacterAvatar from "./components/CharacterAvatar";
+import CharacterStats from "./components/CharacterStats";
+import InventoryActions from "./components/InventoryActions";
+
+const Demo = styled("div")(() => ({
   backgroundColor: "#ffffff85",
   borderRadius: ".4em",
 }));
@@ -31,10 +26,11 @@ const CharacterDetails = ({
     }
   }, []);
   const userID = refUser.current.id;
-  const [inventory, setInventory] = useState([]);
-  let characterToDisplay = characters.find((character) => {
-    return character.character_id === selectedCharacter;
-  });
+  let characterToDisplay = characters.find(
+    (character: { character_id: any }) => {
+      return character.character_id === selectedCharacter;
+    },
+  );
   const handleUpdate = () => {
     onUpdateCharacter();
   };
@@ -50,7 +46,6 @@ const CharacterDetails = ({
     // handleUpdsate()
   }, [characterToDisplay?.character_id]);
   const characterImageId = characterToDisplay?.character?.image || 1;
-  const image = "/avatars/" + characterImageId + ".png";
   return (
     <div>
       <Box
@@ -69,108 +64,17 @@ const CharacterDetails = ({
           <List dense={true}>
             <ListItem sx={{ mr: 16 }}>
               <Box sx={{ mr: 1 }}>
-                <Avatar alt="Travis Howard" src={image} />
+                <CharacterAvatar characterImageId={characterImageId} />
               </Box>
-              <ListItemText
-                primary="Nom "
-                secondary={characterToDisplay?.character?.name}
-              />
-              <ListItemText primary="XP " secondary={characterToDisplay?.xp} />
-              <ListItemText
-                primary="Force "
-                secondary={characterToDisplay?.strength}
-              />
-              <ListItemText
-                primary="Niveau "
-                secondary={characterToDisplay?.level}
-              />
-              <ListItemText
-                primary="Vie "
-                secondary={characterToDisplay?.lifePoints}
-              />
-              <ListItemText
-                primary="Défense "
-                secondary={characterToDisplay?.defense}
-              />
+              <CharacterStats character={characterToDisplay} />
             </ListItem>
             <Box sx={{ mr: 1 }}>
               <ListItem sx={{ mr: 16 }}>
-                <Button
-                  onClick={() => {
-                    GamePlay.updateInventory(userID, "helmet", 1).then(
-                      (response) => {
-                        console.warn("response => ", response);
-                        GamePlay.updateUserCharacters(
-                          characterToDisplay.character_id,
-                          "helmet",
-                          -1,
-                        ).then((response) => {
-                          console.warn("updateUserCharacters => ", response);
-                          handleUpdate();
-                        });
-                      },
-                    );
-                  }}
-                  sx={{ mr: 1 }}
-                  variant="outlined"
-                >
-                  <ListItemText
-                    primary="Chapeau"
-                    secondary={characterToDisplay?.helmet}
-                  />
-                </Button>
-                <Button
-                  onClick={() => {
-                    GamePlay.updateInventory(userID, "shield", 1).then(
-                      (response) => {
-                        console.warn("response => ", response);
-                        GamePlay.updateUserCharacters(
-                          characterToDisplay.character_id,
-                          "shield",
-                          -1,
-                        ).then((response) => {
-                          console.warn("updateUserCharacters => ", response);
-                          handleUpdate();
-                        });
-                      },
-                    );
-                  }}
-                  sx={{ mr: 1 }}
-                  variant="outlined"
-                >
-                  <ListItemText
-                    primary="Plastron"
-                    secondary={characterToDisplay?.shield}
-                  />
-                </Button>
-                <Button
-                  onClick={() => {
-                    GamePlay.updateInventory(userID, "weapon", 1).then(
-                      (response) => {
-                        console.warn(
-                          "\n🚀 > file : front-ror/src/components/Characters/CharacterDetails.tsx:157 > ).then > response:",
-                          response,
-                        );
-
-                        GamePlay.updateUserCharacters(
-                          characterToDisplay.character_id,
-                          "weapon",
-                          -1,
-                        ).then((response) => {
-                          console.warn("updateUserCharacters => ", response);
-                          handleUpdate();
-                        });
-                      },
-                    );
-                  }}
-                  sx={{ mr: 1 }}
-                  variant="outlined"
-                >
-                  <ListItemText
-                    primary="Épée "
-                    secondary={characterToDisplay?.weapon}
-                  />
-                </Button>
+                <InventoryActions
+                  character={characterToDisplay}
+                  userId={userID}
+                  onUpdate={handleUpdate}
+                />
               </ListItem>
             </Box>
           </List>
