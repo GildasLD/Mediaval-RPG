@@ -20,7 +20,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
   const userId = refUser.current.id;
   const [username, setUsername] = useState("");
 
-  const handleUpdate = (newInventory) => {
+  const handleUpdate = (newInventory: any) => {
     const updatedInventory = {
       newInventory,
       ...inventory,
@@ -90,7 +90,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 onClick={() => {
                   GamePlay.updateInventory(userId, "helmet").then(
                     (response) => {
-                      console.warn("response => ", response);
+                      // console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
                         selectedCharacter,
                         "helmet",
@@ -111,7 +111,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 onClick={() => {
                   GamePlay.updateInventory(userId, "shield").then(
                     (response) => {
-                      console.warn("response => ", response);
+                      // console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
                         selectedCharacter,
                         "shield",
@@ -132,7 +132,7 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 onClick={() => {
                   GamePlay.updateInventory(userId, "weapon").then(
                     (response) => {
-                      console.warn("response => ", response);
+                      // console.warn("response => ", response);
                       GamePlay.updateUserCharacters(
                         selectedCharacter,
                         "weapon",

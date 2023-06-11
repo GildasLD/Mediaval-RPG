@@ -86,18 +86,10 @@ const Register = () => {
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
               />
             </Form.Group>
-            <Button
-              className="mt-2"
-              variant="primary p-2"
-              onClick={handleRegister}
-            >
+            <Button className="mt-2" onClick={handleRegister}>
               Inscription
             </Button>
-            <Button
-              className="mt-2"
-              variant="primary p-2"
-              onClick={handleLogin}
-            >
+            <Button className="mt-2" onClick={handleLogin}>
               Connexion
             </Button>
             {error && <p>{error}</p>}

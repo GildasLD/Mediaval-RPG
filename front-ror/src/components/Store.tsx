@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
@@ -17,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getLocalUser } from "../helpers/User";
 import GamePlay from "../service/GamePlay";
+
 const Demo = styled("div")(() => ({
   backgroundColor: "#ffffff85",
   borderRadius: ".4em",
@@ -55,7 +55,7 @@ const Store = () => {
     navigate("/characters");
   };
   const userID = refUser.current.id;
-  const handleObjectSelection = (object) => {
+  const handleObjectSelection = (object: string) => {
     switch (object) {
       case "helmet":
         setTranslate("un chapeau");
@@ -75,7 +75,7 @@ const Store = () => {
     if (userID != null) {
       GamePlay.updateInventory(userID, object, 1).then((response) => {
         handleClickOpen();
-        console.warn("response => ", JSON.stringify(response, null, 2));
+        // console.warn("response => ", JSON.stringify(response, null, 2));
         handleClickOpen();
         // alert(`OK, vous avez choisi de vous procurer ${translate}, bon choix !`);
         // navigate("/characters");
