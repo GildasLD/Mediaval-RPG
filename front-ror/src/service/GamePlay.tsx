@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 class GamePlay {
   createCharacter(characterName) {
-    let userId = Cookies.get("current-user");
+    let userId: number = Cookies.get("current-user");
     userId = JSON.parse(userId).id || 1;
     return axios
       .request({
@@ -69,10 +69,6 @@ class GamePlay {
         );
         return;
     }
-    // console.warn(
-    //   "\n🚀 > file : front-ror/src/service/GamePlay.tsx:53 > GamePlay > updateUserCharacters > data:",
-    //   data,
-    // );
     return axios
       .request({
         method: "PATCH",

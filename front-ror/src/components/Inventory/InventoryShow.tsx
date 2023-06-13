@@ -15,6 +15,7 @@ const Demo = styled("div")(({ theme }) => ({
   backgroundColor: "#ffffff85",
   borderRadius: ".4em",
 }));
+
 const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
   const refUser = useRef(0);
   const userId = refUser.current.id;
@@ -87,17 +88,20 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 <ListItemText primary="Argent " secondary={inventory?.money} />
               </Button>
               <Button
-                onClick={() => {
-                  GamePlay.updateInventory(userId, "helmet").then(
-                    (response) => {
-                      // console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        selectedCharacter,
-                        "helmet",
-                      );
-                      handleUpdate(response);
-                    },
-                  );
+                onClick={async () => {
+                  try {
+                    const response = await GamePlay.updateInventory(
+                      userId,
+                      "helmet",
+                    );
+                    await GamePlay.updateUserCharacters(
+                      selectedCharacter,
+                      "helmet",
+                    );
+                    handleUpdate(response);
+                  } catch (error) {
+                    console.error("Error:", error);
+                  }
                 }}
                 sx={{ mr: 1 }}
                 variant="outlined"
@@ -108,17 +112,20 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 />
               </Button>
               <Button
-                onClick={() => {
-                  GamePlay.updateInventory(userId, "shield").then(
-                    (response) => {
-                      // console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        selectedCharacter,
-                        "shield",
-                      );
-                      handleUpdate(response);
-                    },
-                  );
+                onClick={async () => {
+                  try {
+                    const response = await GamePlay.updateInventory(
+                      userId,
+                      "shield",
+                    );
+                    await GamePlay.updateUserCharacters(
+                      selectedCharacter,
+                      "shield",
+                    );
+                    handleUpdate(response);
+                  } catch (error) {
+                    console.error("Error:", error);
+                  }
                 }}
                 sx={{ mr: 1 }}
                 variant="outlined"
@@ -129,17 +136,20 @@ const InventoryShow = ({ selectedCharacter, inventory, onUpdateInventory }) => {
                 />
               </Button>
               <Button
-                onClick={() => {
-                  GamePlay.updateInventory(userId, "weapon").then(
-                    (response) => {
-                      // console.warn("response => ", response);
-                      GamePlay.updateUserCharacters(
-                        selectedCharacter,
-                        "weapon",
-                      );
-                      handleUpdate(response);
-                    },
-                  );
+                onClick={async () => {
+                  try {
+                    const response = await GamePlay.updateInventory(
+                      userId,
+                      "weapon",
+                    );
+                    await GamePlay.updateUserCharacters(
+                      selectedCharacter,
+                      "weapon",
+                    );
+                    handleUpdate(response);
+                  } catch (error) {
+                    console.error("Error:", error);
+                  }
                 }}
                 sx={{ mr: 1 }}
                 variant="outlined"
