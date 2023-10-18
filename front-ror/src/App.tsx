@@ -6,6 +6,7 @@ import Quest from "./components/Quest";
 import Quests from "./components/Quests";
 import Register from "./components/Register";
 import Store from "./components/Store";
+import Admin from "./components/Admin/Admin";
 
 LicenseInfo.setLicenseKey(
   "41bb5af2e7f0c0377375a0beeedfd1f6Tz01ODAxNDY3MixFPTE3MTAxNTMyNTA0NjAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y",
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="register" element={<Register />} />
           <Route path="store" element={<Store />} />
           <Route path="characters" element={<CharacterSelector />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="quests" element={<Quests />} />
           <Route path="quests">
             <Route path="store" element={<Store />} />

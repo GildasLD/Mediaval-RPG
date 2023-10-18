@@ -1,21 +1,17 @@
 import {
   Box,
   Button,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getLocalUser } from "../helpers/User";
 import GamePlay from "../service/GamePlay";
+import ConfirmationDialog from "../helpers/ConfirmationDialog";
 
 const Demo = styled("div")(() => ({
   backgroundColor: "#ffffff85",
@@ -25,27 +21,22 @@ const Demo = styled("div")(() => ({
 const Store = () => {
   const refUser = useRef(0);
   const [open, setOpen] = useState(false);
-  const [translate, setTranslate] = useState("");
+  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("Bravo !");
+  const [userID, setUserID] = useState(1);
   useEffect(() => {
-    let currentUser = getLocalUser();
+    const currentUser = getLocalUser();
+
+    console.warn(`\n🚀 > currentUser:`, currentUser);
+
     if (currentUser) {
       refUser.current = currentUser;
+      if (currentUser.id) {
+        setUserID(currentUser.id);
+      }
     }
   }, []);
-  const [cookieContent, setCookieContent] = useState({});
   const navigate = useNavigate();
-  useEffect(() => {
-    let getCookie = Cookies.get("mainCharacter");
-    if (getCookie != null) {
-      getCookie = JSON.parse(getCookie);
-      setCookieContent(getCookie);
-      // console.warn(`\n🚀 > Store > cookieContent`, cookieContent);
-    } else {
-      console.warn("\n🚀 > ERROR : Store > cannot get cookie");
-    }
-    // console.warn("\n🚀 > useEffect > cookie-js set cookie");
-  }, [cookieContent.id]);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -54,35 +45,31 @@ const Store = () => {
     setOpen(false);
     navigate("/characters");
   };
-  const userID = refUser.current.id;
   const handleObjectSelection = (object: string) => {
+    let itemName = "";
     switch (object) {
       case "helmet":
-        setTranslate("un chapeau");
+        itemName = "un chapeau";
         break;
       case "shield":
-        setTranslate("un bouclier");
+        itemName = "un bouclier";
         break;
       case "weapon":
-        setTranslate("une épée");
+        itemName = "une épée";
         break;
       default:
         break;
     }
-    const updatedCookieContent = { ...cookieContent, selectedObject: object };
-    Cookies.set("mainCharacter", JSON.stringify(updatedCookieContent));
+    const translatedMessage = `Vous avez choisi ${itemName}, bon choix !`;
+    setMessage(translatedMessage);
 
-    if (userID != null) {
-      GamePlay.updateInventory(userID, object, 1).then((response) => {
-        handleClickOpen();
-        // console.warn("response => ", JSON.stringify(response, null, 2));
-        handleClickOpen();
-        // alert(`OK, vous avez choisi de vous procurer ${translate}, bon choix !`);
-        // navigate("/characters");
-      });
-    } else {
-      navigate("/");
-    }
+    // console.warn(`\n🚀 > userID:`, userID);
+
+    GamePlay.updateInventory(userID, object, 1).then(() => {
+      handleClickOpen();
+    });
+    handleClickOpen();
+    // navigate("/");
   };
 
   return (
@@ -92,8 +79,6 @@ const Store = () => {
         justifyContent="center"
         alignItems="flex-end"
         flexDirection="column"
-        // minHeight="60vh"
-        // maxWidth="100vh"
         sx={{ p: 1 }}
       >
         <Demo>
@@ -130,36 +115,12 @@ const Store = () => {
         </Demo>
       </Box>
       <div>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>
-            <Typography
-              sx={{
-                px: 2,
-              }}
-              variant="h6"
-              component="div"
-            >
-              Bravo !
-            </Typography>
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText
-              sx={{
-                color: "#272727",
-                bgcolor: "background.paper",
-                boxShadow: 3,
-                borderRadius: 2,
-                p: 2,
-                minWidth: 300,
-              }}
-            >
-              <Typography variant="h6" component="div">
-                Vous avez choisi <b>{translate}</b>
-                <br /> Bon choix !
-              </Typography>
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
+        <ConfirmationDialog
+          title={title}
+          content={message}
+          open={open}
+          onClose={handleClose}
+        />
       </div>
     </div>
   );

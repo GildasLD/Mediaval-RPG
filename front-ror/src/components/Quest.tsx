@@ -41,9 +41,9 @@ const Quest = () => {
   };
   return (
     <div>
-      {choice === null && renderChoiceButtons()}
-      {choice === "riddle" && renderRiddleChallenge()}
-      {choice === "fight" && renderFightChallenge()}
+      {null === choice && renderChoiceButtons()}
+      {"riddle" === choice && renderRiddleChallenge()}
+      {"fight" === choice && renderFightChallenge()}
     </div>
   );
 };

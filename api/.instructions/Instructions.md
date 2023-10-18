@@ -10,24 +10,6 @@ language : Ruby On Rails
 05...26/06/2023
 ```
 
-```
-PYTHON
-driving_school (PYTHON django)
-Entre
-08/05/2023, 08h42
-et
-04/06/2023, 23h42
-```
-
-```
-JAVA
-Planning general
-Entre
-26/06/2023, 08h42
-et
-09/07/2023, 23h42
-```
-
 - The totality of your source files, except all useless files (binary, temp files, obj files,...), must be included in your delivery.
 - All the bonus files (including a potential specific Makefile) should be in a directory named _bonus_.
 - Error messages have to be written on the error output, and the program should then exit with the 84 error code (0 if there is no error).

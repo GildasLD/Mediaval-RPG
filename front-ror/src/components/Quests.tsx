@@ -64,7 +64,7 @@ const Quests = () => {
                 className="bg-white p-1 rounded img-description bg-opacity-40"
                 key={quest.id}
               >
-                {quest.description}{" "}
+                {quest.description}
               </Box>
             </Box>
           </>

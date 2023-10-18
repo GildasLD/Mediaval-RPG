@@ -34,7 +34,7 @@ const CharacterSelector = () => {
   const updateInventory = async (updatedInventory: { newInventory: any }) => {
     const newInventory = updatedInventory.newInventory;
     setInventory(newInventory);
-    updateCharacter();
+    await updateCharacter();
     fetchInventory();
   };
   const updateCharacter = async () => {
@@ -118,7 +118,15 @@ const CharacterSelector = () => {
               style={{ padding: "0.5rem", color: "#000", margin: "0" }}
               value={selectedCharacter}
               label="Personnage"
-              onChange={(e) => setSelectedCharacter(e.target.value)}
+              onChange={(e) => {
+                if ("string" === typeof e.target.value) {
+                  setSelectedCharacter(parseInt(e.target.value));
+                } else if ("number" === typeof e.target.value) {
+                  setSelectedCharacter(e.target.value);
+                } else {
+                  Error("Type of e.target.value is not handled");
+                }
+              }}
             >
               {characters.map((character) => (
                 <MenuItem
@@ -172,7 +180,7 @@ const CharacterSelector = () => {
             variant="contained"
             onClick={createCharacter}
           >
-            Create
+            Créer
           </Button>
         </Box>
       </Box>

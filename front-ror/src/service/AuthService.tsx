@@ -7,8 +7,7 @@ axios.defaults.withCredentials = true;
 class AuthService {
   sha256sum = (string: string) => {
     const cleanLogin = this.cleanLogin(string);
-    const hash = sha256(cleanLogin);
-    return hash;
+    return sha256(cleanLogin);
   };
 
   login(login: string, password: string) {
@@ -29,7 +28,7 @@ class AuthService {
   }
 
   async register(login: string, password: string) {
-    login = this.cleanLogin(login);
+    this.cleanLogin(login);
     const response = await axios.post(`${API_URL}/users.json`, {
       user: {
         username: login,
@@ -44,18 +43,18 @@ class AuthService {
     // );
     return response.data;
   }
- 
+
   async getCurrentUser() {
+    let result = null;
+
     try {
       const response = await axios.get(`${API_URL}/users/current_user`);
-      // console.warn(
-      //   `🚀 > file: AuthService.tsx:71 > AuthService > .then > response:`,
-      //   response,
-      // );
-      return response.data;
+      result = response.data;
     } catch (error) {
       console.error("Error fetching the current user :", error);
     }
+
+    return result;
   }
 
   cleanLogin(input: string) {

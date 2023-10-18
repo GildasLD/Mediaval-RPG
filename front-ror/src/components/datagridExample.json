@@ -1,0 +1,322 @@
+{
+  "columns": [
+    {
+      "field": "id",
+      "hide": true
+    },
+    {
+      "field": "desk",
+      "headerName": "Desk",
+      "width": 110,
+      "hide": true
+    },
+    {
+      "field": "commodity",
+      "headerName": "Commodity",
+      "width": 180,
+      "editable": true
+    },
+    {
+      "field": "traderName",
+      "headerName": "Trader Name",
+      "width": 120,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "traderEmail",
+      "headerName": "Trader Email",
+      "width": 150,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "quantity",
+      "headerName": "Quantity",
+      "type": "number",
+      "width": 140,
+      "editable": true
+    },
+    {
+      "field": "filledQuantity",
+      "headerName": "Filled Quantity",
+      "availableAggregationFunctions": ["min", "max", "avg", "size"],
+      "type": "number",
+      "width": 120,
+      "editable": true
+    },
+    {
+      "field": "isFilled",
+      "headerName": "Is Filled",
+      "align": "center",
+      "type": "boolean",
+      "width": 80,
+      "editable": true
+    },
+    {
+      "field": "status",
+      "headerName": "Status",
+      "type": "singleSelect",
+      "valueOptions": ["Open", "PartiallyFilled", "Filled", "Rejected"],
+      "width": 150,
+      "editable": true
+    },
+    {
+      "field": "unitPrice",
+      "headerName": "Unit Price",
+      "type": "number",
+      "editable": true
+    },
+    {
+      "field": "unitPriceCurrency",
+      "headerName": "Unit Price Currency",
+      "type": "singleSelect",
+      "valueOptions": [
+        "USD",
+        "GBP",
+        "JPY",
+        "EUR",
+        "BRL",
+        "MXN",
+        "AUD",
+        "CAD",
+        "NZD",
+        "ARS",
+        "CHF",
+        "THB",
+        "HKD",
+        "TRY"
+      ],
+      "width": 120,
+      "editable": true
+    },
+    {
+      "field": "subTotal",
+      "headerName": "Sub Total",
+      "type": "number",
+      "width": 120
+    },
+    {
+      "field": "feeRate",
+      "headerName": "Fee Rate",
+      "type": "number",
+      "width": 80,
+      "editable": true
+    },
+    {
+      "field": "feeAmount",
+      "headerName": "Fee Amount",
+      "type": "number",
+      "width": 120
+    },
+    {
+      "field": "incoTerm",
+      "type": "singleSelect",
+      "valueOptions": [
+        "EXW (Ex Works)",
+        "FAS (Free Alongside Ship)",
+        "FCA (Free Carrier)",
+        "CPT (Carriage Paid To)",
+        "DAP (Delivered at Place)",
+        "DPU (Delivered at Place Unloaded)",
+        "DDP (Delivered Duty Paid)"
+      ],
+      "editable": true
+    },
+    {
+      "field": "totalPrice",
+      "headerName": "Total in USD",
+      "type": "number",
+      "width": 160,
+      "hide": true
+    },
+    {
+      "field": "pnl",
+      "headerName": "PnL",
+      "type": "number",
+      "width": 140,
+      "hide": true
+    },
+    {
+      "field": "maturityDate",
+      "headerName": "Maturity Date",
+      "type": "date",
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "tradeDate",
+      "headerName": "Trade Date",
+      "type": "date",
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "brokerId",
+      "headerName": "Broker Id",
+      "hide": true,
+      "editable": true
+    },
+    {
+      "field": "brokerName",
+      "headerName": "Broker Name",
+      "width": 140,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "counterPartyName",
+      "headerName": "Counterparty",
+      "width": 180,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "counterPartyCountry",
+      "headerName": "Counterparty Country",
+      "type": "singleSelect",
+      "valueOptions": [
+        {
+          "value": "AF",
+          "code": "AF",
+          "label": "Afghanistan",
+          "phone": "93"
+        },
+        {
+          "value": "AL",
+          "code": "AL",
+          "label": "Albania",
+          "phone": "355"
+        },
+        {
+          "value": "DZ",
+          "code": "DZ",
+          "label": "Algeria",
+          "phone": "213"
+        },
+        {
+          "value": "AX",
+          "code": "AX",
+          "label": "Alland Islands",
+          "phone": "358"
+        },
+        {
+          "value": "ZW",
+          "code": "ZW",
+          "label": "Zimbabwe",
+          "phone": "263"
+        }
+      ],
+      "editable": true,
+      "width": 120,
+      "hide": true
+    },
+    {
+      "field": "counterPartyCurrency",
+      "headerName": "Counterparty Currency",
+      "type": "singleSelect",
+      "valueOptions": [
+        "USD",
+        "GBP",
+        "JPY",
+        "EUR",
+        "BRL",
+        "MXN",
+        "AUD",
+        "CAD",
+        "NZD",
+        "ARS",
+        "CHF",
+        "THB",
+        "HKD",
+        "TRY"
+      ],
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "counterPartyAddress",
+      "headerName": "Counterparty Address",
+      "width": 200,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "counterPartyCity",
+      "headerName": "Counterparty City",
+      "width": 120,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "taxCode",
+      "headerName": "Tax Code",
+      "type": "singleSelect",
+      "valueOptions": ["BR", "1250L", "20G", "BC45", "IGN179"],
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "contractType",
+      "headerName": "Contract Type",
+      "type": "singleSelect",
+      "valueOptions": ["FP", "TM", "CR"],
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "rateType",
+      "headerName": "Rate Type",
+      "type": "singleSelect",
+      "valueOptions": ["Fixed", "Floating"],
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "lastUpdated",
+      "headerName": "Updated on",
+      "type": "dateTime",
+      "width": 180,
+      "editable": true,
+      "hide": true
+    },
+    {
+      "field": "dateCreated",
+      "headerName": "Created on",
+      "type": "date",
+      "width": 150,
+      "editable": true,
+      "hide": true
+    }
+  ],
+  "rows": [],
+  "initialState": {
+    "columns": {
+      "columnVisibilityModel": {
+        "id": false,
+        "desk": false,
+        "traderName": false,
+        "traderEmail": false,
+        "totalPrice": false,
+        "pnl": false,
+        "maturityDate": false,
+        "tradeDate": false,
+        "brokerId": false,
+        "brokerName": false,
+        "counterPartyName": false,
+        "counterPartyCountry": false,
+        "counterPartyCurrency": false,
+        "counterPartyAddress": false,
+        "counterPartyCity": false,
+        "taxCode": false,
+        "contractType": false,
+        "rateType": false,
+        "lastUpdated": false,
+        "dateCreated": false
+      }
+    }
+  },
+  "experimentalFeatures": {
+    "ariaV7": true
+  }
+}
